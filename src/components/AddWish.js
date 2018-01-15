@@ -34,7 +34,7 @@ export default class AddWish extends Component {
 					<TextInput style={styles.input}
 					 onChangeText={(offer) => this.setState({...this.state, offer})}
 					 value={this.state.offer}
-				 />
+				/>
 			</View>
 			<View style={styles.row}>
 				<Button
@@ -43,7 +43,7 @@ export default class AddWish extends Component {
 					color="#a52a2a" />
 				<Button
 					onPress={() =>
-						dispatch(NavigationActions.navigate({ routeName: 'Main' }))}
+						dispatch(NavigationActions.navigate({ routeName: 'Main', params: {} }))}
 					title="skip for now >>"
 					color="#008b8b" />
 			</View>
@@ -69,5 +69,8 @@ const styles = StyleSheet.create({
 		borderWidth:2,
 		borderColor:'#A4DFF9',
 		backgroundColor: 'transparent',
+	},
+	row: {
+		fontSize: 10,
 	}
 });

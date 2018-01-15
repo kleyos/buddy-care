@@ -5,23 +5,22 @@ import { StyleSheet, View,
 
 import { StackNavigator, NavigationActions } from 'react-navigation';
 import itemList from '../data/data';
+import { genarateListOfObject } from './utils'
 
 export default class MainScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'BuddyCare',
-    headerRight: <Button color={'black'} title={'+'} onPress={() => console.log('add')} />
+    headerRight: <Button color={'black'} title={'+'} onPress={() => console.log('add', navigation)} />
+  });
 
-  };
 
-keyExtractor = item => item._id;
-
-renderCard = (el, dispatch, i, item) => (
-  <View style={styles.item} key={i}>
+  renderCard = (el, dispatch, i, item) => (
+    <View style={styles.item} key={i}>
     <View style={styles.itemRow}>
     <TouchableOpacity
       onPress={()=>
         dispatch(NavigationActions.navigate({ routeName: 'Profile', params: { item } }))}
-      >
+        >
       <Image source={{uri: el.pic}} style={styles.picture}/>
     </TouchableOpacity>
       <Text style={styles.itemText}> {el.type}</Text>
@@ -32,46 +31,31 @@ renderCard = (el, dispatch, i, item) => (
       <Text style={styles.itemName}> {el.name}</Text>
       <Button
         onPress={() =>{console.log(el.type === "offer" ? "APPLY" : "HELP")} }
-          title={el.type === "offer" ? "APPLY" : "HELP"}
-          color="#008b8b" />
+        title={el.type === "offer" ? "APPLY" : "HELP"}
+        color="#008b8b" />
     </View>
   </View>
   )
 
-renderListOfCard = item => {
-  const wishes = item.wishes.map(wish => ({
-    id: item._id,
-    name: item.name,
-    pic: item.picture,
-    text: wish,
-    type: 'wish',
-  }))
-  const offers = item.offers.map(offer => ({
-    id: item._id,
-    name: item.name,
-    pic: item.picture,
-    text: offer,
-    type: 'offer',
-  }))
-  return wishes.concat(offers);
-}
-renderItemOfList = (item, dispatch) => {
-  return this.renderListOfCard(item).map((el, i) => this.renderCard(el, dispatch, i, item));
-}
+  renderItemOfList = (item, dispatch) => {
+    return genarateListOfObject(item).map((el, i) => this.renderCard(el, dispatch, i, item));
+  }
 
-render() {
-  const { navigate, dispatch } = this.props.navigation;
+  keyExtractor = item => item._id;
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={itemList}
-        keyExtractor={this.keyExtractor}
-        renderItem={({item}) => this.renderItemOfList(item, dispatch)}
-      />
-    </View>
-  )
-}}
+  render() {
+    const { dispatch } = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={itemList}
+          keyExtractor={this.keyExtractor}
+          renderItem={({item}) => this.renderItemOfList(item, dispatch)}
+        />
+      </View>
+    )
+  }
+}
 
 
 
