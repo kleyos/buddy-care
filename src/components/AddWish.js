@@ -26,15 +26,16 @@ export default class AddWish extends Component {
 					<Text style={styles.label}>Well done! One more step</Text>
 					<Image />
 					<Text style={styles.label}>Add your wish:</Text>
-					<TextInput style={styles.input}
-					 onChangeText={(wish) => this.setState({...this.state, wish})}
-					 value={this.state.wish} />
+					<TextInput
+						style={styles.input}
+					 	onChangeText={(wish) => this.setState({...this.state, wish})}
+					 	value={this.state.wish} />
 
 					<Text style={styles.label}>Add your offer:</Text>
-					<TextInput style={styles.input}
-					 onChangeText={(offer) => this.setState({...this.state, offer})}
-					 value={this.state.offer}
-				/>
+					<TextInput
+						style={styles.input}
+					 	onChangeText={(offer) => this.setState({...this.state, offer})}
+					 	value={this.state.offer} />
 			</View>
 			<View style={styles.row}>
 				<Button
@@ -71,6 +72,6 @@ const styles = StyleSheet.create({
 		backgroundColor: 'transparent',
 	},
 	row: {
-		fontSize: 10,
+		// fontSize: 10,
 	}
 });

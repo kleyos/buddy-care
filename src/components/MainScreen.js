@@ -4,16 +4,15 @@ import { StyleSheet, View,
   Image, TouchableOpacity, Button, } from 'react-native';
 
 import { StackNavigator, NavigationActions } from 'react-navigation';
+import Header from './Header'
+
 import itemList from '../data/data';
 import { genarateListOfObject } from './utils'
 
 export default class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'BuddyCare',
-    headerRight: <Button color={'black'} title={'+'} onPress={() => console.log('add', navigation)} />
-  });
-
-
+    header: <Header navigate={navigation.navigate} back={navigation.goBack} />,
+  })
   renderCard = (el, dispatch, i, item) => (
     <View style={styles.item} key={i}>
     <View style={styles.itemRow}>
