@@ -46,6 +46,7 @@ function auth(state = initialAuthState, action) {
       return {
         ...state,
         isLoggedIn: true,
+        token: action.value,
         id: '5a58b89af043b25999236cff',
         photo: '../images,IMG.jpg',
         name: 'Olha Ierushenko',
