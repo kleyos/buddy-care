@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 import Header from './Header'
 import { genarateListOfObject } from './utils'
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
-export default class ProfileScreen extends Component {
 
-  static navigationOptions = ({ navigation }) => ({
-    // title: `Profile ${navigation.state.params.item.name}`,
-     headerRight: <Header
-      navigate={navigation.navigate}
-      back={navigation.goBack}
-      item={navigation.state.params.item} />,
-	})
+ export default class ProfileScreen extends Component {
 
   renderOwnerCard = (el, i) => (
     <View style={styles.item} key={i}>
@@ -60,17 +54,20 @@ export default class ProfileScreen extends Component {
     </View>)
 
   renderListOfCard = (item) =>
-    { // console.log('profile', item, genarateListOfObject(item))
-    if (this.props.owner === item._id) {
-      return genarateListOfObject(item).map((el, i) => this.renderOwnerCard(el, i))
+    {
+    const { params } = this.props.navigation.state;
+    const { auth } = this.props.screenProps;
+
+    if (auth.id === params.id) {
+      return item.map((el,i) => this.renderOwnerCard(el, i));
     } else {
-      return genarateListOfObject(item).map((el, i) => this.renderCard(el, i))
+      return item.map((el,i) => this.renderCard(el, i));
     }
   }
 
   render() {
-    console.log(this.props)
     const { params } = this.props.navigation.state;
+    const { data } = this.props.screenProps;
     const viewImages = {
       background: require('../images/IMG.jpg'),
     };
@@ -80,21 +77,35 @@ export default class ProfileScreen extends Component {
           headerMinHeight={60}
           headerMaxHeight={200}
           extraScrollHeight={20}
-          title={params.item.name}
+          title={params.name}
           backgroundImage={viewImages.background}
           backgroundImageScale={1.2}
-          renderContent={() => this.renderListOfCard(params.item)}
+          renderContent={() => this.renderListOfCard(data.filterData || data.profileData)}
         />
       </View>
     );
   }
 }
+ProfileScreen.navigationOptions = ({ navigation, screenProps }) => ({
+   headerRight: <Header
+    dispatch={navigation.dispatch}
+    navigate={navigation.navigate}
+    back={navigation.goBack}
+    data={screenProps.data.profileData}
+    auth={screenProps.auth}/>,
+    headerLeft: <Button
+      onPress={ () => {
+        navigation.dispatch({ type: 'CLEAR_FILTER_DATA' })
+        navigation.dispatch(NavigationActions.navigate({routeName: 'Main'})) }}
+      title="<"
+      style={styles.backButton}
+      color="#037aff" />
 
+})
 const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    width: deviceWidth,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -141,4 +152,11 @@ const styles = StyleSheet.create({
     borderColor: '#A4DFF9',
     borderWidth: 2,
     },
+  backBtn: {
+    height: 21,
+    width: 13,
+    marginLeft: 10,
+    marginRight: 22,
+    marginVertical: 12,
+  }
 });

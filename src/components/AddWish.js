@@ -8,7 +8,7 @@ import { StackNavigator, NavigationActions } from 'react-navigation';
 
 export default class AddWish extends Component {
 	static navigationOptions = {
-		title: 'Add Wish/Offer',
+		title: null,
 	};
 	constructor(props) {
 		super(props);

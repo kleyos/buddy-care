@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
-
 export default class Header extends Component {
+    constructor(props){
+        super(props)
+        this.state = { key: null }
+    }
     renderHeader = () => {
+        const { data } = this.props;
+        const { key } = this.state;
         const buttons = [
             {   name: 'Add',
                 press: () => this.props.navigate('AddWish')
             },
             {
                 name: 'All',
-                press: () => this.props.navigate('AddWish')
+                press: () => this.props.dispatch({
+                    type: 'GET_FILTER_DATA',
+                    value: data
+                })
             },
             {
                 name: 'Wishes',
-                press: () => this.props.navigate('AddWish')
+                press: () => this.props.dispatch({
+                    type: 'GET_FILTER_DATA',
+                    value: data.filter(item => item.type === 'wish')
+                })
             },
             {
                 name: 'Offers',
-                press: () => this.props.navigate('AddWish')
+                press: () => this.props.dispatch({
+                    type: 'GET_FILTER_DATA',
+                    value: data.filter(item => item.type === 'offer')
+                })
             }
         ]
         return (
+
             <View style={styles.header}>
                 <View style={styles.buttons}>
                     {buttons.map((item,i) =>
@@ -29,8 +44,9 @@ export default class Header extends Component {
                             key={i}
                             style={styles.btn}
                             onPress={item.press}
+                            onPressIn={()=>this.setState({ key: i })}
                         >
-                            <Text style={styles.text}> {item.name} </Text>
+                            <Text style={[styles.text, key === i ? {opacity: 0.4} : {opacity: 1}]}> {item.name} </Text>
                         </TouchableOpacity>)
                     }
                     <View style={styles.user}>
@@ -66,21 +82,27 @@ const styles = StyleSheet.create({
     btn: {
         padding: 5,
         marginLeft: 5,
+        opacity: 1,
     },
     user: {
-        width: 50,
-        height: 50,
+        width: 35,
+        height: 35,
         borderRadius: 50,
         borderColor: '#037aff',
         borderWidth: 1,
         margin: 5,
     },
     userPic: {
-        width: 45,
-        height: 45,
+        width: 35,
+        height: 35,
     },
     text: {
         color: '#037aff',
         fontWeight: "700",
+    },
+    pressedBtn: {
+        opacity: 0.2,
+        padding: 5,
+        marginLeft: 5,
     }
 })

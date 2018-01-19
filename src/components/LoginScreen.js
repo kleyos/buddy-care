@@ -6,13 +6,13 @@ import { Button, StyleSheet, Text, View, Image} from 'react-native';
 const LoginScreen = ({ navigation }) => (
 	<View style={styles.container}>
 		<Text style={styles.welcome}>
-      Marketplace for good acts
+      		Marketplace for good acts
 		</Text>
 		<Image />
 		<Text style={styles.instructions}>
-      {"  "}
-      {"  "}
-      {"  "}
+			{'  '}
+			{'  '}
+			{'  '}
 		</Text>
 		<Button
 			onPress={() => navigation.dispatch({ type: 'LOGIN' })}

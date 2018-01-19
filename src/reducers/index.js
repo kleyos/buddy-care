@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import { NavigationActions } from 'react-navigation';
 
 import { AppNavigator } from '../navigators/AppNavigator';
+import { genarateListOfObject } from '../components/utils';
+
 
 // Start with two routes: The Main screen, with the Login screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('AddWish');
@@ -41,9 +43,29 @@ const initialAuthState = { isLoggedIn: false };
 function auth(state = initialAuthState, action) {
   switch (action.type) {
     case 'LOGIN':
-      return { ...state, isLoggedIn: true };
+      return {
+        ...state,
+        isLoggedIn: true,
+        id: '5a58b89af043b25999236cff',
+        photo: '../images,IMG.jpg',
+        name: 'Olha Ierushenko',
+       };
     case 'LOGOUT':
       return { ...state, isLoggedIn: false };
+    default:
+      return state;
+  }
+}
+function data(state = {}, action) {
+  switch (action.type) {
+    case 'GET_ALL_DATA':
+      return { ...state, fullData: action.value.map(item => genarateListOfObject(item)).reduce((a,b) => a.concat(b))};
+    case 'GET_FILTER_DATA':
+      return { ...state, filterData: action.value };
+    case 'GET_PROFILE_DATA':
+      return { ...state, profileData: action.value };
+    case 'CLEAR_FILTER_DATA':
+      return { ...state, filterData: null };
     default:
       return state;
   }
@@ -52,7 +74,7 @@ function auth(state = initialAuthState, action) {
 const AppReducer = combineReducers({
   nav,
   auth,
-
+  data,
 });
 
 export default AppReducer;
