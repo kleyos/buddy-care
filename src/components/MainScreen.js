@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View,
   FlatList, Text,
   Image, TouchableOpacity, Button, } from 'react-native';
+import { Avatar, Badge } from 'react-native-elements'
 
 import { NavigationActions } from 'react-navigation';
 import Header from './Header'
@@ -15,33 +16,38 @@ export default class MainScreen extends Component {
     this.props.navigation.dispatch({ type: 'GET_ALL_DATA' , value: itemList })
   }
   renderCard = (el, dispatch, i, data) => (
-    <View style={styles.item} key={i}>
+    <View style={[styles.item, styles.itemShadow]} key={i}>
       <View style={styles.itemRow}>
-      <TouchableOpacity
-        onPress={()=>{
-          dispatch({
-            type: 'CLEAR_FILTER_DATA' ,
-          })
-          dispatch({
-            type: 'GET_PROFILE_DATA' ,
-            value: data.fullData.filter(elem => elem.id === el.id),
-          })
-          dispatch(NavigationActions.navigate({
-            routeName: 'Profile',
-            params: {
-              id: el.id,
-              name: el.name,
-            }
-          }))
-        }}>
-        <Image source={{uri: el.pic}} style={styles.picture}/>
-      </TouchableOpacity>
-        <Text style={styles.itemText}> {el.type}</Text>
-        <Text style={styles.itemText}> {el.status}</Text>
+		 <Avatar medium rounded
+			source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //el.pic
+			onPress={()=>{
+				dispatch({
+					type: 'CLEAR_FILTER_DATA' ,
+				})
+				dispatch({
+					type: 'GET_PROFILE_DATA' ,
+					value: data.fullData.filter(elem => elem.id === el.id),
+				})
+				dispatch(NavigationActions.navigate({
+					routeName: 'Profile',
+					params: {
+					id: el.id,
+					name: el.name,
+					}
+				}))
+			}}
+			activeOpacity={0.7}
+		/>
+	  	<Text style={styles.itemName}> {el.name}</Text>
       </View>
       <Text style={[styles.itemText]}> {el.text}</Text>
       <View style={styles.itemRowBtn}>
-        <Text style={styles.itemName}> {el.name}</Text>
+		<Badge containerStyle={{ backgroundColor: el.type === 'wish' ? 'yellow' : 'lightblue'}}>
+  			<Text>{el.type}</Text>
+		</Badge>
+		<Badge containerStyle={{ backgroundColor: el.status === 'waiting' ? '#37b5ae' : '#EBEAEA'}}>
+  			<Text>{el.status}</Text>
+		</Badge>
         <Button
           onPress={() =>{console.log('change status on accepted')} }
           title={(el.type === "offer" ? "APPLY" : "HELP")}
@@ -61,13 +67,15 @@ export default class MainScreen extends Component {
     const { dispatch } = this.props.navigation;
     const { data } = this.props.screenProps;
     return (
-      <View style= {styles.container}>
+    //   <View style= {styles.container}>
         <FlatList
-          data={data.filterData || data.fullData}
-          keyExtractor={this.keyExtractor}
-          renderItem={({item, i}) => this.renderItemOfList(item, dispatch, i, data)}
+			// contentContainerStyle={styles.container}
+			style={styles.container}
+        	data={data.filterData || data.fullData}
+        	keyExtractor={this.keyExtractor}
+			renderItem={({item, i}) =>  this.renderCard(item, dispatch, i, data)}
         />
-      </View>
+    //   </View>
     )
   }
 }
@@ -84,47 +92,40 @@ MainScreen.navigationOptions = ({ navigation, screenProps }) => ({
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#F7F7F7',
 	},
 	item: {
-		flex: 10,
+		flex:1,
 		padding: 10,
-		borderBottomColor: '#A4DFF9',
-		borderWidth: 1,
-		width: 350,
-		// height: 150,
-  },
-  itemColumn:{
-    flex: 1,
-  },
+		margin: 5,
+		backgroundColor: '#FFF',
+	},
+	itemShadow:{
+		shadowColor:'#EBEAEA',
+		shadowOffset: {width: 1, height: 1},
+		shadowOpacity: 1,
+		shadowRadius: 10,
+	},
 	itemRow: {
 		flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  itemRowBtn: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
+	itemRowBtn: {
 		flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
 	},
 	itemText: {
-    padding: 5,
+		padding: 5,
 		fontSize: 12,
 		color: 'black',
-  },
-  itemName: {
+	},
+	itemName: {
 		fontSize: 16,
 		color: 'black',
 	},
-	picture: {
-		width: 50,
-    height: 50,
-    borderColor: '#A4DFF9',
-		borderWidth: 2,
-	}
 
-});
+	});
