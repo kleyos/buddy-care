@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {
 	AppRegistry,
-	Text, Button,
+	Text,
 	View, Image, TextInput, StyleSheet
 } from 'react-native';
+import { Button } from 'react-native-elements';
+
 import { StackNavigator, NavigationActions } from 'react-navigation';
 
 export default class AddWish extends Component {
@@ -46,11 +48,18 @@ export default class AddWish extends Component {
 					 	onChangeText={(offer) => this.setState({...this.state, offer})}
 					 	value={this.state.offer} />
 			</View>
-			<View style={styles.row}>
-				<Button
+			<View style={styles.btns}>
+				{/* <Button
 					onPress={this.submit}
 					title="SUBMIT"
-					color="#a52a2a" />
+					color="#a52a2a" /> */}
+				<Button raised
+					onPress={this.submit}
+					icon={{name: 'home', size: 14}}
+					buttonStyle={styles.submitBtn}
+					textStyle={{textAlign: 'center'}}
+					title={`SUBMIT`}
+				/>
 				<Button
 					onPress={() =>
 						dispatch(NavigationActions.navigate({ routeName: 'Main', params: {} }))}
@@ -67,6 +76,11 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F5FCFF',
 		padding:10,
 	},
+	submitBtn: {
+		backgroundColor: "#a52a2a",
+		borderRadius: 10,
+		width: 200,
+	},
 	label: {
 		fontSize: 18,
 		margin: 5,
@@ -80,7 +94,7 @@ const styles = StyleSheet.create({
 		borderColor:'#A4DFF9',
 		backgroundColor: 'transparent',
 	},
-	row: {
-		// fontSize: 10,
+	btns: {
+		marginTop: 15,
 	}
 });
