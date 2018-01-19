@@ -2,25 +2,24 @@ import React, { Component } from 'react';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { Badge, Icon } from 'react-native-elements'
 
 import Header from './Header'
 import { genarateListOfObject } from './utils'
 
-const deviceHeight = Dimensions.get('window').height;
-const deviceWidth = Dimensions.get('window').width;
-
- export default class ProfileScreen extends Component {
+export default class ProfileScreen extends Component {
 
   renderOwnerCard = (el, i) => (
-    <View style={styles.item} key={i}>
-      <View style={styles.itemTextRow}>
-        <View style={[styles.itemLabel, { backgroundColor : el.type === 'wish' ? 'yellow' : 'lightblue'}]}>
-          <Text style={[styles.labelText, ]}>
-            {el.type}
-          </Text>
-        </View>
-        <Text style={styles.itemText}> {el.text}</Text>
+    <View style={[styles.item, styles.itemShadow]} key={i}>
+      <View style={styles.itemLabel}>
+        <Badge containerStyle={{ backgroundColor: el.type === 'wish' ? 'yellow' : 'lightblue'}}>
+          <Text>{el.type}</Text>
+        </Badge>
+        <Badge containerStyle={{ backgroundColor: el.status === 'waiting' ? '#e67575' : '#EBEAEA'}}>
+          <Text>{el.status}</Text>
+        </Badge>
       </View>
+      <Text style={styles.itemText}> {el.text}</Text>
 
       <View style={styles.itemBtnRow}>
         <Button
@@ -35,21 +34,22 @@ const deviceWidth = Dimensions.get('window').width;
   </View>
   )
   renderCard = (el, i) => (
-    <View style={styles.item} key={i}>
-      <View style={styles.itemTextRow}>
-        <View style={[styles.itemLabel, { backgroundColor : el.type === 'wish' ? 'yellow' : 'lightblue'}]}>
-          <Text style={[styles.labelText, ]}>
-            {el.type}
-          </Text>
-        </View>
-        <Text style={styles.itemText}> {el.text}</Text>
+    <View style={[styles.item, styles.itemShadow]} key={i}>
+      <View style={styles.itemLabel}>
+        <Badge containerStyle={{ backgroundColor: el.type === 'wish' ? 'yellow' : 'lightblue'}}>
+          <Text>{el.type}</Text>
+        </Badge>
+        <Badge containerStyle={{ backgroundColor: el.status === 'waiting' ? '#e67575' : '#EBEAEA'}}>
+          <Text>{el.status}</Text>
+        </Badge>
       </View>
-
+      <Text style={styles.itemText}> {el.text}</Text>
       <View style={styles.itemBtnRow}>
         <Button
           onPress={() =>{console.log('CLOSE')} }
-          title={"I CAN DO THIS"}
-          color="#b22222" />
+          title={el.type === 'wish' ? "I CAN DO THIS" : "I WANT THIS"}
+          color="#b22222"
+          disabled={el.status !== 'waiting'} />
       </View>
     </View>)
 
@@ -68,9 +68,6 @@ const deviceWidth = Dimensions.get('window').width;
   render() {
     const { params } = this.props.navigation.state;
     const { data } = this.props.screenProps;
-    const viewImages = {
-      background: require('../images/IMG.jpg'),
-    };
     return (
       <View style={styles.container}>
         <ReactNativeParallaxHeader
@@ -78,7 +75,7 @@ const deviceWidth = Dimensions.get('window').width;
           headerMaxHeight={200}
           extraScrollHeight={20}
           title={params.name}
-          backgroundImage={viewImages.background}
+          backgroundImage={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //params.pic
           backgroundImageScale={1.2}
           renderContent={() => this.renderListOfCard(data.filterData || data.profileData)}
         />
@@ -93,72 +90,50 @@ ProfileScreen.navigationOptions = ({ navigation, screenProps }) => ({
     back={navigation.goBack}
     data={screenProps.data.profileData}
     auth={screenProps.auth}/>,
-    headerLeft: <TouchableOpacity
-      style={styles.backBtn}
+    headerLeft: <Icon
+      name='chevron-left'
+      type='octicon'
+      color='#037aff'
+      iconStyle={{ marginLeft: 10 }}
       onPress={ () => {
         navigation.dispatch({ type: 'CLEAR_FILTER_DATA' })
         navigation.dispatch(NavigationActions.navigate({routeName: 'Main'}))} }
-        // navigation.goBack()}}
-      >
-        <Text style={{ color: "#037aff", fontWeight: '600' }}> {'MAIN'} </Text>
-      </TouchableOpacity>
+  />
 })
 const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F7F7F7',
   },
-
   item: {
-    flex: 1,
-    width: deviceWidth,
-    alignItems:'stretch',
-    borderColor: '#C0C0C0',
-    borderBottomWidth: 1,
-    padding:10,
+    flex:1,
+    padding: 10,
+    margin: 5,
+    backgroundColor: '#FFF',
   },
-  itemTextRow: {
-    justifyContent: 'center',
+  itemShadow:{
+    shadowColor:'#EBEAEA',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 10,
   },
+  itemLabel: {
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
   itemBtnRow: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  itemLabel: {
 
-    padding: 5,
-    borderRadius: 10,
-    width: 55,
-    alignItems: 'center',
-  },
-  labelText: {
-    color: 'black',
-    fontWeight: "700",
-  },
   itemText: {
     fontSize: 14,
     color: 'black',
+    marginVertical: 10,
   },
-  itemName: {
-    fontSize: 16,
-    color: 'black',
-  },
-  picture: {
-    width: '100%',
-    height: '30%',
-    borderColor: '#A4DFF9',
-    borderWidth: 2,
-    },
-  backBtn: {
-    height: 21,
-    // width: 13,
-    marginLeft: 10,
-    marginRight: 22,
-    marginVertical: 12,
-
-  }
 });

@@ -33,6 +33,7 @@ export default class MainScreen extends Component {
 					params: {
 					id: el.id,
 					name: el.name,
+					pic: el.pic,
 					}
 				}))
 			}}
@@ -40,7 +41,7 @@ export default class MainScreen extends Component {
 		/>
 	  	<Text style={styles.itemName}> {el.name}</Text>
       </View>
-      <Text style={[styles.itemText]}> {el.text}</Text>
+      <Text style={styles.itemText}> {el.text}</Text>
       <View style={styles.itemRowBtn}>
 		<Badge containerStyle={{ backgroundColor: el.type === 'wish' ? 'yellow' : 'lightblue'}}>
   			<Text>{el.type}</Text>
