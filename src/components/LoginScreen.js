@@ -27,7 +27,8 @@ const LoginScreen = ({ navigation }) => (
 					} else {
 				  		AccessToken.getCurrentAccessToken().then(
 							(data) => {
-					  			console.log('my token ',data.accessToken.toString());
+								  console.log('my token ',data.accessToken.toString());
+
 					  			navigation.dispatch({ type: 'LOGIN', value: data.accessToken.toString() });
 							});
 					}

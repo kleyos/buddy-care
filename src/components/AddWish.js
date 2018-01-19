@@ -14,6 +14,15 @@ export default class AddWish extends Component {
 		super(props);
 		this.state = {};
 	}
+	componentDidMount(){
+		console.log('mount')
+		const { token } = this.props.screenProps.auth;
+		fetch(`https://graph.facebook.com/${token}?fields=id,name,picture`)
+			.then(res => res.json())
+			.then(resJson => console.log('resJson',resJson))
+			.catch(error =>console.log(error) )
+	}
+
 	submit = () => {
 		console.log('submit!!!')
 	}
