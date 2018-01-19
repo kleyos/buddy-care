@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
-import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import Header from './Header'
@@ -93,14 +93,15 @@ ProfileScreen.navigationOptions = ({ navigation, screenProps }) => ({
     back={navigation.goBack}
     data={screenProps.data.profileData}
     auth={screenProps.auth}/>,
-    headerLeft: <Button
+    headerLeft: <TouchableOpacity
+      style={styles.backBtn}
       onPress={ () => {
         navigation.dispatch({ type: 'CLEAR_FILTER_DATA' })
-        navigation.dispatch(NavigationActions.navigate({routeName: 'Main'})) }}
-      title="<"
-      style={styles.backButton}
-      color="#037aff" />
-
+        navigation.dispatch(NavigationActions.navigate({routeName: 'Main'}))} }
+        // navigation.goBack()}}
+      >
+        <Text style={{ color: "#037aff", fontWeight: '600' }}> {'MAIN'} </Text>
+      </TouchableOpacity>
 })
 const styles = StyleSheet.create({
 
@@ -154,9 +155,10 @@ const styles = StyleSheet.create({
     },
   backBtn: {
     height: 21,
-    width: 13,
+    // width: 13,
     marginLeft: 10,
     marginRight: 22,
     marginVertical: 12,
+
   }
 });

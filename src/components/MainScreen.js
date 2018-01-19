@@ -11,7 +11,6 @@ import { genarateListOfObject } from './utils'
 
 export default class MainScreen extends Component {
   componentDidMount() {
-    console.log('mount')
     this.props.navigation.dispatch({ type: 'CLEAR_FILTER_DATA' })
     this.props.navigation.dispatch({ type: 'GET_ALL_DATA' , value: itemList })
   }
@@ -64,7 +63,6 @@ export default class MainScreen extends Component {
     return (
       <View style= {styles.container}>
         <FlatList
-          //contentContainerStyle={styles.container}
           data={data.filterData || data.fullData}
           keyExtractor={this.keyExtractor}
           renderItem={({item, i}) => this.renderItemOfList(item, dispatch, i, data)}
