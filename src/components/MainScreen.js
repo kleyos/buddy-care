@@ -31,9 +31,9 @@ export default class MainScreen extends Component {
 				dispatch(NavigationActions.navigate({
 					routeName: 'Profile',
 					params: {
-					id: el.id,
-					name: el.name,
-					pic: el.pic,
+						id: el.id,
+						name: el.name,
+						pic: el.pic,
 					}
 				}))
 			}}
@@ -68,25 +68,24 @@ export default class MainScreen extends Component {
     const { dispatch } = this.props.navigation;
     const { data } = this.props.screenProps;
     return (
-    //   <View style= {styles.container}>
         <FlatList
-			// contentContainerStyle={styles.container}
 			style={styles.container}
         	data={data.filterData || data.fullData}
         	keyExtractor={this.keyExtractor}
 			renderItem={({item, i}) =>  this.renderCard(item, dispatch, i, data)}
         />
-    //   </View>
     )
   }
 }
 
 MainScreen.navigationOptions = ({ navigation, screenProps }) => ({
   headerRight: <Header
-  dispatch={navigation.dispatch}
-  navigate={navigation.navigate}
-  back={navigation.goBack}
-  data={screenProps.data.fullData} />,
+  	dispatch={navigation.dispatch}
+  	navigate={navigation.navigate}
+  	back={navigation.goBack}
+  	// data={screenProps.data.fullData}
+  	// auth={screenProps.auth}
+/>,
 })
 
 

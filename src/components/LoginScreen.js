@@ -16,7 +16,7 @@ export default class LoginScreen extends Component {
 			</View>
 			<View style={{flex: 2}}>
 				<Image style={{width: 300, height: 250}}
-					sourse={require('../images/super.jpg')}/>
+					sourse={require('../images/smile.jpg')}/>
 			</View>
 			<View style={{flex: 1}}>
 				<LoginButton

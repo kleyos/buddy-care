@@ -87,9 +87,7 @@ ProfileScreen.navigationOptions = ({ navigation, screenProps }) => ({
    headerRight: <Header
     dispatch={navigation.dispatch}
     navigate={navigation.navigate}
-    back={navigation.goBack}
-    data={screenProps.data.profileData}
-    auth={screenProps.auth}/>,
+    back={navigation.goBack} />,
     headerLeft: <Icon
       name='chevron-left'
       type='octicon'

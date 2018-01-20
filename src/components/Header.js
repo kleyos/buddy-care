@@ -1,61 +1,59 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { connect } from 'react-redux';
 
-export default class Header extends Component {
+import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { Avatar, ButtonGroup } from 'react-native-elements';
+
+
+class Header extends Component {
     constructor(props){
         super(props)
-        this.state = { key: null }
+        this.state = { key: null, selectedIndex: 1 }
     }
-    renderHeader = () => {
-        const { data } = this.props;
-        const { key } = this.state;
-        const buttons = [
-            {   name: 'Add',
-                press: () => this.props.navigate('AddWish')
-            },
-            {
-                name: 'All',
-                press: () => this.props.dispatch({
+    updateIndex = (selectedIndex) => {
+        const { dispatch, navigate, data } = this.props;
+        this.setState({ selectedIndex })
+        switch(selectedIndex) {
+            case 0:
+                navigate('AddWish')
+                break
+            case 1:
+                dispatch({ type: 'GET_FILTER_DATA', value: data.fullData })
+                break
+            case 2:
+                dispatch({
                     type: 'GET_FILTER_DATA',
-                    value: data
+                    value: data.fullData.filter(item => item.type === 'wish')
                 })
-            },
-            {
-                name: 'Wishes',
-                press: () => this.props.dispatch({
+                break
+            case 3:
+                dispatch({
                     type: 'GET_FILTER_DATA',
-                    value: data.filter(item => item.type === 'wish')
+                    value: data.fullData.filter(item => item.type === 'offer')
                 })
-            },
-            {
-                name: 'Offers',
-                press: () => this.props.dispatch({
-                    type: 'GET_FILTER_DATA',
-                    value: data.filter(item => item.type === 'offer')
-                })
-            }
-        ]
-        return (
+                break
+            default: break
+        }
+    }
 
+    renderHeader = () => {
+        const { data, auth, navigate } = this.props;
+        const { key, selectedIndex } = this.state;
+        const buttons = ['Add', 'All', 'Wishes', 'Offers']
+        return (
             <View style={styles.header}>
                 <View style={styles.buttons}>
-                    {buttons.map((item,i) =>
-                        <TouchableOpacity
-                            key={i}
-                            style={styles.btn}
-                            onPress={item.press}
-                            onPressIn={()=>this.setState({ key: i })}
-                        >
-                            <Text style={[styles.text, key === i ? {opacity: 0.4} : {opacity: 1}]}> {item.name} </Text>
-                        </TouchableOpacity>)
-                    }
-                    <View style={styles.user}>
-                        <TouchableOpacity
-                            onPress={() => this.props.navigate('Profile')}
-                        >
-                            <Image sourse={require('../images/IMG.jpg')} style={styles.userPic} />
-                        </TouchableOpacity>
-                    </View>
+                    <ButtonGroup
+                        selectedIndex={selectedIndex}
+                        onPress={this.updateIndex}
+                        buttons={buttons}
+                        textStyle={styles.text}
+                        containerStyle={{height: 25}}
+                    />
+                    <Avatar small rounded
+                        containerStyle={{ margin: 5 }}
+                        source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //auth.photo
+                        onPress={() => navigate('Profile', { id: auth.id, name: auth.name, pic: auth.photo })}/>
                 </View>
             </View>
         )
@@ -66,12 +64,12 @@ export default class Header extends Component {
 }
 const styles = StyleSheet.create({
     header: {
-    height: 50,
-    flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'flex-end',
-      backgroundColor: 'transparent',
+        height: 50,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+         alignItems: 'flex-end',
+        backgroundColor: 'transparent',
     },
     buttons: {
         flex: 1,
@@ -79,30 +77,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
     },
-    btn: {
-        padding: 5,
-        marginLeft: 5,
-        opacity: 1,
-    },
-    user: {
-        width: 35,
-        height: 35,
-        borderRadius: 50,
-        borderColor: '#037aff',
-        borderWidth: 1,
-        margin: 5,
-    },
-    userPic: {
-        width: 35,
-        height: 35,
-    },
     text: {
-        color: '#037aff',
+        fontSize: 10,
         fontWeight: "700",
+        paddingHorizontal: 8,
+        paddingVertical: 10
     },
-    pressedBtn: {
-        opacity: 0.2,
-        padding: 5,
-        marginLeft: 5,
-    }
 })
+const mapStateToProps = state => ({
+    auth: state.auth,
+    data: state.data,
+  });
+export default connect(mapStateToProps)(Header)
