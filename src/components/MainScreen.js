@@ -83,8 +83,6 @@ MainScreen.navigationOptions = ({ navigation, screenProps }) => ({
   	dispatch={navigation.dispatch}
   	navigate={navigation.navigate}
   	back={navigation.goBack}
-  	// data={screenProps.data.fullData}
-  	// auth={screenProps.auth}
 />,
 })
 

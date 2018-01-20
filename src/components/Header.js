@@ -11,11 +11,13 @@ class Header extends Component {
         this.state = { key: null, selectedIndex: 1 }
     }
     updateIndex = (selectedIndex) => {
-        const { dispatch, navigate, data } = this.props;
+        const { dispatch, navigate, data, auth: { isLoggedIn } } = this.props;
         this.setState({ selectedIndex })
         switch(selectedIndex) {
             case 0:
-                navigate('AddWish')
+                if (isLoggedIn) {
+                    navigate('AddWish')
+                } else { navigate('Login') }
                 break
             case 1:
                 dispatch({ type: 'GET_FILTER_DATA', value: data.fullData })
@@ -37,7 +39,7 @@ class Header extends Component {
     }
 
     renderHeader = () => {
-        const { data, auth, navigate } = this.props;
+        const { data, auth: { result, isLoggedIn }, navigate } = this.props;
         const { key, selectedIndex } = this.state;
         const buttons = ['Add', 'All', 'Wishes', 'Offers']
         return (
@@ -50,10 +52,18 @@ class Header extends Component {
                         textStyle={styles.text}
                         containerStyle={{height: 25}}
                     />
-                    <Avatar small rounded
-                        containerStyle={{ margin: 5 }}
-                        source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //auth.photo
-                        onPress={() => navigate('Profile', { id: auth.id, name: auth.name, pic: auth.photo })}/>
+                    { isLoggedIn &&
+                        <Avatar small rounded
+                            containerStyle={{ margin: 5 }}
+                            source={{ uri: result.picture.data.url }}
+                            onPress={() => navigate('Profile',
+                                {
+                                    id: result.id, name:
+                                    result.name,
+                                    pic: result.picture.data.url
+                                })}
+                        />
+                    }
                 </View>
             </View>
         )

@@ -9,18 +9,10 @@ export default class AddWish extends Component {
 		super(props);
 		this.state = {};
 	}
-	componentDidMount(){
-		console.log('mount')
-		const { token } = this.props.screenProps.auth;
-		fetch(`https://graph.facebook.com/${token}?fields=id,name,picture`)
-			.then(res => res.json())
-			.then(resJson => console.log('resJson',resJson))
-			.catch(error =>console.log(error) )
-	}
 
 	submit = (dispatch) => {
 		console.log('submit!!!')
-		dispatch(NavigationActions.navigate({ routeName: 'Main', params: {} }))
+		dispatch(NavigationActions.navigate({ routeName: 'Main' }))
 	}
 
 	render() {
@@ -54,11 +46,10 @@ export default class AddWish extends Component {
 						title="SUBMIT"
 						color="#a52a2a" />
 
-					<Button
-						onPress={() =>
-							dispatch(NavigationActions.navigate({ routeName: 'Main', params: {} }))}
-						title="skip for now >>"
-						color="#008b8b" />
+					<Text style={styles.skip}
+						onPress={() => dispatch(NavigationActions.navigate({ routeName: 'Main' }))}>
+						skip for now >>
+					</Text>
 				</View>
 		</View>)
 	}
@@ -80,7 +71,6 @@ const styles = StyleSheet.create({
 	label: {
 		fontSize: 12,
 		margin: 5,
-		fontSize: 20,
 		textAlign: 'center',
 	},
 	input:{
@@ -89,7 +79,14 @@ const styles = StyleSheet.create({
 		textAlign:'left',
 		padding: 5,
 		borderWidth:1,
-		borderColor:'#A4DFF9',
+		borderColor:'#008b8b',
 		backgroundColor: 'transparent',
 	},
+	skip: {
+		fontSize: 14,
+		textAlign: 'center',
+		margin: 10,
+		fontFamily: 'Cochin',
+		color: "#008b8b",
+	}
 });

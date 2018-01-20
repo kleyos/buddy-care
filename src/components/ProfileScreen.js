@@ -56,9 +56,9 @@ export default class ProfileScreen extends Component {
   renderListOfCard = (item) =>
     {
     const { params } = this.props.navigation.state;
-    const { auth } = this.props.screenProps;
+    const { auth: { result } } = this.props.screenProps;
 
-    if (auth.id === params.id) {
+    if (result && result.id === params.id) {
       return item.map((el,i) => this.renderOwnerCard(el, i));
     } else {
       return item.map((el,i) => this.renderCard(el, i));
