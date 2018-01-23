@@ -19,7 +19,7 @@ export default class MainScreen extends Component {
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <View style={styles.itemRow}>
 		 <Avatar medium rounded
-			source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //el.pic
+			source={{ uri: el.pic }}
 			onPress={()=>{
 				dispatch({
 					type: 'CLEAR_FILTER_DATA' ,
@@ -69,20 +69,22 @@ export default class MainScreen extends Component {
     const { data } = this.props.screenProps;
     return (
         <FlatList
-			style={styles.container}
+					style={styles.container}
         	data={data.filterData || data.fullData}
         	keyExtractor={this.keyExtractor}
-			renderItem={({item, i}) =>  this.renderCard(item, dispatch, i, data)}
+					renderItem={({item, i}) =>  this.renderCard(item, dispatch, i, data)}
         />
     )
   }
 }
 
 MainScreen.navigationOptions = ({ navigation, screenProps }) => ({
-  headerRight: <Header
+	headerBackTitleStyle: {fontSize: 10},
+	headerRight: <Header
   	dispatch={navigation.dispatch}
   	navigate={navigation.navigate}
-  	back={navigation.goBack}
+		back={navigation.goBack}
+		data={screenProps.data.fullData}
 />,
 })
 

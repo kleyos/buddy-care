@@ -4,11 +4,28 @@ import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 're
 import { NavigationActions } from 'react-navigation';
 import { Badge, Icon } from 'react-native-elements'
 
+import FBSDK from 'react-native-fbsdk';
+const { LoginButton } = FBSDK;
+
+
 import Header from './Header'
 import { genarateListOfObject } from './utils'
 
 export default class ProfileScreen extends Component {
+  constructor(props) {
+		super(props);
+		this.state = {
+      isOwner: false
+    };
+	}
 
+  componentDidMount() {
+    const { params } = this.props.navigation.state;
+    const { auth: { result } } = this.props.screenProps;
+    if (result && result.id === params.id) {
+      this.setState({ isOwner: true })
+    }
+  }
   renderOwnerCard = (el, i) => (
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <View style={styles.itemLabel}>
@@ -55,14 +72,13 @@ export default class ProfileScreen extends Component {
 
   renderListOfCard = (item) =>
     {
-    const { params } = this.props.navigation.state;
-    const { auth: { result } } = this.props.screenProps;
-    if (!item || item.lenght === 0) {
+    const { isOwner } = this.state;
+    if (!item || item.length === 0) {
       return <View style={styles.itemWarn}>
         <Text style={styles.warn}>You don't have any wish or offer</Text>
       </View>
     }
-    if (result && result.id === params.id) {
+    if (isOwner) {
       return item.map((el,i) => this.renderOwnerCard(el, i));
     } else {
       return item.map((el,i) => this.renderCard(el, i));
@@ -71,8 +87,9 @@ export default class ProfileScreen extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    const { data,  } = this.props.screenProps;
-
+    const { data, auth } = this.props.screenProps;
+    const { dispatch } = this.props.navigation;
+    const { isOwner } = this.state;
     return (
       <View style={styles.container}>
         <ReactNativeParallaxHeader
@@ -80,10 +97,13 @@ export default class ProfileScreen extends Component {
           headerMaxHeight={200}
           extraScrollHeight={20}
           title={params.name}
-          backgroundImage={{uri: params.pic }}//"https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //params.pic
-          backgroundImageScale={1.2}
+          backgroundImage={{uri: params.pic}}
           renderContent={() => this.renderListOfCard(data.filterData || data.profileData)}
         />
+        { isOwner &&
+          <View style={styles.loginBtnContainer}>
+            <LoginButton onLogoutFinished={() => { dispatch({ type: 'LOGOUT' }); console.log('logout')}} />
+          </View> }
       </View>
     );
   }
@@ -92,15 +112,16 @@ ProfileScreen.navigationOptions = ({ navigation, screenProps }) => ({
    headerRight: <Header
     dispatch={navigation.dispatch}
     navigate={navigation.navigate}
-    back={navigation.goBack} />,
-    headerLeft: <Icon
-      name='chevron-left'
-      type='octicon'
-      color='#037aff'
-      iconStyle={{ marginLeft: 10 }}
-      onPress={ () => {
-        navigation.dispatch({ type: 'CLEAR_FILTER_DATA' })
-        navigation.dispatch(NavigationActions.navigate({routeName: 'Main'}))} }
+    back={navigation.goBack}
+    data={screenProps.data.profileData} />,
+  headerLeft: <Icon
+    name='chevron-left'
+    type='octicon'
+    color='#037aff'
+    iconStyle={{ marginLeft: 10 }}
+    onPress={ () => {
+      navigation.dispatch({ type: 'CLEAR_FILTER_DATA' })
+      navigation.dispatch(NavigationActions.navigate({routeName: 'Main'}))} }
   />
 })
 const styles = StyleSheet.create({
@@ -108,6 +129,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F7F7F7',
+  },
+  loginBtnContainer: {
+    height: 50,
+    backgroundColor: '#F7F7F7',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   item: {
     flex:1,

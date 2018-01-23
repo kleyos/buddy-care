@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { NavigationActions } from 'react-navigation';
+
 import { Button, StyleSheet, Text, View, Image} from 'react-native';
 import FBSDK from 'react-native-fbsdk';
 import { Avatar } from 'react-native-elements';
@@ -9,7 +11,7 @@ const { LoginButton, AccessToken, GraphRequestManager,  GraphRequest} = FBSDK;
 export default class LoginScreen extends Component {
 	componentDidMount() {
 		const infoRequest = new GraphRequest(
-			'/me?fields=name,picture',
+			'/me?fields=name,picture.width(500).height(500)',
 			null,
 			this.responseInfoCallback
 		);
@@ -52,7 +54,7 @@ export default class LoginScreen extends Component {
 								AccessToken.getCurrentAccessToken().then(
 									(data) => {
 										const infoRequest = new GraphRequest(
-											'/me?fields=name,picture',
+											'/me?fields=name,picture.width(500).height(500)',
 											null,
 											this.responseInfoCallback
 										);
@@ -63,6 +65,10 @@ export default class LoginScreen extends Component {
 					}
 					onLogoutFinished={() => console.log('logout')}
 				/>
+				<Text style={styles.skip}
+						onPress={() => navigation.dispatch(NavigationActions.navigate({ routeName: 'Main' }))}>
+						skip for now >>
+				</Text>
 			</View>
 		</View>;
 	}
@@ -73,6 +79,7 @@ LoginScreen.propTypes = {
 
 LoginScreen.navigationOptions = {
 	title: 'Welcome to BuddyCare',
+	headerLeft: null,
 };
 
 const styles = StyleSheet.create({
@@ -88,4 +95,12 @@ const styles = StyleSheet.create({
 		margin: 10,
 		fontFamily: 'Cochin',
 	},
+	skip: {
+		fontSize: 14,
+		textAlign: 'center',
+		margin: 10,
+		fontFamily: 'Cochin',
+		color: "#008b8b",
+	}
+
 });

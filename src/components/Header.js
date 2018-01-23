@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import { Avatar, ButtonGroup } from 'react-native-elements';
-
-
 class Header extends Component {
     constructor(props){
         super(props)
@@ -25,13 +23,13 @@ class Header extends Component {
             case 2:
                 dispatch({
                     type: 'GET_FILTER_DATA',
-                    value: data.fullData.filter(item => item.type === 'wish')
+                    value: data.filter(item => item.type === 'wish')
                 })
                 break
             case 3:
                 dispatch({
                     type: 'GET_FILTER_DATA',
-                    value: data.fullData.filter(item => item.type === 'offer')
+                    value: data.filter(item => item.type === 'offer')
                 })
                 break
             default: break
@@ -39,7 +37,7 @@ class Header extends Component {
     }
 
     renderHeader = () => {
-        const { data, auth: { result, isLoggedIn }, navigate } = this.props;
+        const { data, auth: { result, isLoggedIn }, navigate, dispatch } = this.props;
         const { key, selectedIndex } = this.state;
         const buttons = ['Add', 'All', 'Wishes', 'Offers']
         return (
@@ -52,16 +50,22 @@ class Header extends Component {
                         textStyle={styles.text}
                         containerStyle={{height: 25}}
                     />
-                    { isLoggedIn &&
+                 { isLoggedIn &&
                         <Avatar small rounded
                             containerStyle={{ margin: 5 }}
                             source={{ uri: result.picture.data.url }}
-                            onPress={() => navigate('Profile',
+                            onPress={() => {
+                                dispatch({
+                                    type: 'GET_PROFILE_DATA' ,
+                                    value: []//data.filter(elem => elem.id === el.id),
+                                })
+                                navigate('Profile',
                                 {
                                     id: result.id, name:
                                     result.name,
                                     pic: result.picture.data.url
-                                })}
+                                })
+                            }}
                         />
                     }
                 </View>
@@ -96,6 +100,5 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = state => ({
     auth: state.auth,
-    data: state.data,
   });
 export default connect(mapStateToProps)(Header)
