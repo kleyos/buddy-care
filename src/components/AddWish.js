@@ -40,11 +40,13 @@ export default class AddWish extends Component {
 					 	onChangeText={(offer) => this.setState({...this.state, offer})}
 					 	value={this.state.offer} />
 				</View>
-				<View style={{flex: 1}}>
-					<Button
-						onPress={() => this.submit(dispatch)}
-						title="SUBMIT"
-						color="#a52a2a" />
+				<View style={{flex: 1, alignItems: 'center'}}>
+					<View style={{width: 100}}>
+						<Button
+							onPress={() => this.submit(dispatch)}
+							title="SUBMIT"
+							color="#a52a2a" />
+					</View>
 
 					<Text style={styles.skip}
 						onPress={() => dispatch(NavigationActions.navigate({ routeName: 'Main' }))}>

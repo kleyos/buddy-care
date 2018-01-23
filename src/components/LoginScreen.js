@@ -7,6 +7,14 @@ import { Avatar } from 'react-native-elements';
 const { LoginButton, AccessToken, GraphRequestManager,  GraphRequest} = FBSDK;
 
 export default class LoginScreen extends Component {
+	componentDidMount() {
+		const infoRequest = new GraphRequest(
+			'/me?fields=name,picture',
+			null,
+			this.responseInfoCallback
+		);
+		new GraphRequestManager().addRequest(infoRequest).start();
+	}
 	responseInfoCallback = (error, result ) => {
 		const { navigation } = this.props;
 		if (error) {
@@ -20,13 +28,16 @@ export default class LoginScreen extends Component {
 		return <View style={styles.container}>
 			<View style={{flex: 1}}>
 				<Text style={styles.welcome}>
-					Marketplace for good acts
+					Marketplace
+				</Text>
+				<Text style={styles.welcome}>
+					for good acts
 				</Text>
 			</View>
-			<View style={{flex: 1}}>
-				<Avatar source={require('../images/super.jpg')}
-					avatarStyle={{width: 300, height: 250}}
-					imageProps={{resizeMode: 'contain'}} />
+			<View style={{flex: 1.5}}>
+				<Image source={require('../images/super.jpg')}
+					style={{width: 300, height: 250}}
+					resizeMode={'contain'} />
 			</View>
 			<View style={{flex: 0.5}}>
 				<LoginButton

@@ -57,7 +57,11 @@ export default class ProfileScreen extends Component {
     {
     const { params } = this.props.navigation.state;
     const { auth: { result } } = this.props.screenProps;
-
+    if (!item || item.lenght === 0) {
+      return <View style={styles.itemWarn}>
+        <Text style={styles.warn}>You don't have any wish or offer</Text>
+      </View>
+    }
     if (result && result.id === params.id) {
       return item.map((el,i) => this.renderOwnerCard(el, i));
     } else {
@@ -67,7 +71,8 @@ export default class ProfileScreen extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    const { data } = this.props.screenProps;
+    const { data,  } = this.props.screenProps;
+
     return (
       <View style={styles.container}>
         <ReactNativeParallaxHeader
@@ -75,7 +80,7 @@ export default class ProfileScreen extends Component {
           headerMaxHeight={200}
           extraScrollHeight={20}
           title={params.name}
-          backgroundImage={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //params.pic
+          backgroundImage={{uri: params.pic }}//"https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}} //params.pic
           backgroundImageScale={1.2}
           renderContent={() => this.renderListOfCard(data.filterData || data.profileData)}
         />
@@ -134,4 +139,15 @@ const styles = StyleSheet.create({
     color: 'black',
     marginVertical: 10,
   },
+  itemWarn: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  warn: {
+    fontSize: 18,
+		textAlign: 'center',
+		margin: 30,
+		fontFamily: 'Cochin',
+		color: "#008b8b",
+  }
 });
