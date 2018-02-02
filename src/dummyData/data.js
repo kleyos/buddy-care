@@ -7,9 +7,9 @@ export default [
 		'offers': []
 	},
 	{
-		'id': '5a58b89af34ae9ecbe40267c',
-		'name': 'Cindy Chen',
-		'imageUrl': "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+		'id': '1588354881245781',
+		'name': 'Olga Yerushenko',
+		'imageUrl': "https://scontent.xx.fbcdn.net/v/t1.0-1/c5.0.720.720/p720x720/14563577_1127376904010250_919151102378859017_n.jpg?oh=fa4ce48bfcda63b838d9402c87eeeaf1&oe=5ADE7E7B",
 		'wishes': [
 			{
 				'wish': 'laborum',
