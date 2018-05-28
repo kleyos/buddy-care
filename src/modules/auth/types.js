@@ -1,0 +1,18 @@
+const types = {
+    LOGIN: {
+      REQUEST: 'LOGIN_REQUEST',
+      SUCCESS: 'LOGIN_SUCCESS',
+      FAILURE: 'LOGIN_FAILURE',
+      TEST: 'LOGIN_TEST',
+    },
+    LOGOUT: {
+      REQUEST: 'LOGOUT_REQUEST',
+      SUCCESS: 'LOGOUT_SUCCESS',
+      FAILURE: 'LOGOUT_FAILURE'
+    },
+    SYNC_USER: 'SYNC_USER',
+    SET_USER_CASES_IDS: 'SET_USER_CASES_IDS',
+    SET_CURRENT_USER_CASE_ID: 'SET_CURRENT_USER_CASE_ID'
+  };
+  
+  export default types;

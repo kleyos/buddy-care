@@ -1,22 +1,20 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+// import NavigatorContainer from './src/containers/NavigatorContainer';
+import Navigator from './src/config/configureNavigation';
+import configureStore from './src/config/configureStore';
+import rootReducer from './src/modules';
+import rootSaga from './src/sagas';
 
-import AppReducer from './src/reducers';
-import AppWithNavigationState from './src/navigators/AppNavigator';
+const store = configureStore(rootReducer, rootSaga);
 
-class BuddyCare extends React.Component {
-	store = createStore(AppReducer);
+const BuddyCare = () => (
+  <Provider store={store}>
+    <Navigator />
+  </Provider>
+);
 
-	render() {
-	  return (
-		<Provider store={this.store}>
-		  <AppWithNavigationState />
-		</Provider>
-	  );
-	}
-  }
 
 AppRegistry.registerComponent('BuddyCare', () => BuddyCare);
 
