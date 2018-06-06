@@ -5,57 +5,58 @@ import {
   login,
   loginSuccess,
   loginFailure,
-  loginTest
 } from '../modules/auth/actions';
 
 
-const { AccessToken, GraphRequestManager, GraphRequest } = FBSDK;
+const {
+  AccessToken,
+  GraphRequestManager,
+  GraphRequest
+} = FBSDK;
 
-function responseInfoCallback(error, result, dispatch) {
-  try {
-    if (error) {
-      console.log(`Error fetching data: ${error.toString()}`);
-      dispatch(loginFailure(error));
+function responseInfoCallback(error, result) {
+  console.log(error, result)
+  
+  function* callback() {
+    try {
+      if (error) {
+        console.log(`Error fetching data: ${error.toString()}`);
+        yield put(loginFailure(error));
+      } else {
+        yield put(loginSuccess(result));
+      }
+    } catch (er) {
+      console.log(er);
+      yield put(loginFailure(er));
     }
-    dispatch(loginSuccess(result));
-  } catch (er) {
-    console.log(er)
-    dispatch(loginFailure(er));
   }
 }
 
-export function loginWorker({ payload }) {
-  const { result, error, dispatch } = payload;
-  console.log(payload)
-  
+export function* loginWorker({ payload }) {
+  const { error, result } = payload;
   try {
-    dispatch({ type: 'LOGIN_TEST' });
     if (error) {
-      console.log(`login has error: ${result.error}`);
+      yield put(loginFailure(error));
     } else if (result.isCancelled) {
-    	console.log('login is cancelled.');
+      console.log('login is cancelled.');
+      yield put(loginFailure(result.isCancelled));
     } else {
-      AccessToken.getCurrentAccessToken().then(data => {
-        const infoRequest = new GraphRequest(
-          '/me?fields=name,picture.width(500).height(500)',
-          null,
-          (er, res) => responseInfoCallback(er, res, dispatch)
-
-        );
-        new GraphRequestManager().addRequest(infoRequest).start();
-      });
+      const infoRequest = new GraphRequest(
+        '/me?fields=name,picture.width(500).height(500)',
+        null,
+        (er, res) => responseInfoCallback(er, res)
+      );
+      new GraphRequestManager().addRequest(infoRequest).start();
     }
   } catch (er) {
     console.log(er);
-    dispatch(loginFailure(er));
+    yield put(loginFailure(er));
   }
 }
 
 function* logoutWorker() {
   try {
-    const data = yield call(reduxSagaFirebase.auth.signOut);
     yield put(logoutSuccess(data));
-    // TODO: roles
     yield put(navigate(navTypes.LOGIN));
     yield put(cleanStore());
   } catch (error) {

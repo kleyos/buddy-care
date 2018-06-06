@@ -3,14 +3,12 @@ import {
   login,
   loginSuccess,
   loginFailure,
-  loginTest
 } from './actions';
 
 const defaultState = {
   loading: false,
   loggedIn: false,
   user: null,
-  test: null,
 };
 
 export default handleActions(
@@ -27,17 +25,13 @@ export default handleActions(
         ...state,
         loading: false,
         loggedIn: true,
-        user: payload,
+        user: payload
       };
     },
     [loginFailure]: state => ({
       ...state,
-      loading: false,
-    }),
-    [loginTest]: state => ({
-      ...state,
-      test: 'holly shit',
-    }),
+      loading: false
+    })
   },
   defaultState
 );
