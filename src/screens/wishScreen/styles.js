@@ -10,14 +10,14 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    // alignItems: 'center',
     backgroundColor: 'transparent'
   },
   text: {
     color: '#6B54A3',
     fontSize: 28,
     textAlign: 'center',
-    margin: 10,
+    marginVertical: 10,
+    marginHorizontal: 40,
     fontFamily: 'Helvetica',
     backgroundColor: 'transparent'
   },
