@@ -19,6 +19,11 @@ export default class MainScreen extends Component {
 
   renderCard = (el, i) => (
     <View style={[styles.item, styles.itemShadow]} key={i}>
+      <Image
+        style={styles.line}
+        source={el.type === 'wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
+        resizeMode="contain"
+      />
       <View style={styles.itemContent}>
         <View style={styles.itemRow}>
           <Avatar
@@ -35,26 +40,19 @@ export default class MainScreen extends Component {
           <Image
             style={styles.itemType}
             source={el.type === 'wish' ? require('../../assets/wish.png') : require('../../assets/offer.png')}
-            resizeMode="stretch"
+            resizeMode="cover"
           />
           <TouchableOpacity
             style={styles.itemBtn}
             onPress={() => console.log('apply')}
           >
             <Image
-              style={styles.itemBtn}
+              style={styles.btn}
               source={el.type === 'wish' ? require('../../assets/helpBtn.png') : require('../../assets/applyBtn.png')}
               resizeMode="contain"
             />
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.topLine}>
-        <Image
-          sytle={styles.line}
-          source={el.type === 'wish' ? require('../../assets/topLineHelp.png') : require('../../assets/topLineApply.png')}
-          // resizeMode="cover"
-        />
       </View>
     </View>
   )
@@ -73,5 +71,5 @@ export default class MainScreen extends Component {
 }
 
 MainScreen.navigationOptions = ({ navigation, screenProps }) => ({
-  header: <MainHeader />
+  header: <MainHeader navigation={navigation} />
 });

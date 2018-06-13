@@ -9,17 +9,16 @@ export default StyleSheet.create({
   },
   item: {
     flex: 1,
-    margin: 5,
+    marginHorizontal: 10,
+    marginVertical: 8,
     backgroundColor: '#FFF'
   },
   itemContent: {
     padding: 10
   },
-  topLine: {
-    position: 'absolute',
-    top: -30,
-    left: -10,
-    width: '100%'
+  line: {
+    width: width - 20,
+    height: 4,
   },
   itemShadow: {
     shadowColor: '#EBEAEA',
@@ -33,13 +32,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
+  
   itemRowBtn: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-
+  itemType: {
+    width: 60,
+    height: 20
+  },
+  btn: {
+    width: 100,
+    height: 45
+  },
   itemText: {
     padding: 5,
     fontSize: 17,
