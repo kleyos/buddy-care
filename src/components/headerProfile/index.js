@@ -48,12 +48,6 @@ export default class HeaderProfile extends Component {
             />}
             {!loggedIn && <View style={{ width: 50 }} />}
           </View>
-          <View style={styles.bottomContainer}>
-            <View style={styles.btnContainer}>
-              {buttons.map((item, i) => this.renderTab(item, i))}
-            </View>
-          </View>
-
         </View>
       );
     }

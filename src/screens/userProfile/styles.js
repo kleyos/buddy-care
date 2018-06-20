@@ -56,6 +56,18 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'black',
     marginLeft: 10
+  },
+  profilePicture: {
+    width,
+    height: 240,
+  },
+  profileName: {
+    backgroundColor: 'transparent',
+    left: 20,
+    top: 200,
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#fff'
   }
 
 });
