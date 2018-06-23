@@ -31,7 +31,7 @@ export default class HeaderProfile extends Component {
           />
           <View style={styles.topContainer}>
             <HeaderBackButton
-              onPress={() => goBack()}
+              onPress={() => this.props.navigation.goBack()}
               tintColor="#fff"
             />
             <Image

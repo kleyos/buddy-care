@@ -6,6 +6,7 @@ import WishScreen from '../containers/WishScreenContainer';
 import OfferScreen from '../containers/OfferScreenContainer';
 import MainScreen from '../containers/MainScreenContainer';
 import UserProfile from '../containers/UserProfileContainer';
+import MyProfile from '../containers/MyProfileContainer';
 
 
 // all navtypes go here
@@ -14,7 +15,8 @@ export const navTypes = {
   WISH: 'wish',
   OFFER: 'offer',
   MAIN: 'main',
-  USER_PROFILE: 'user_profile'
+  USER_PROFILE: 'user_profile',
+  MY_PROFILE: 'my_profile'
 };
 
 // Screens for MAIN SCREEN STACK NAVIGATOR
@@ -24,10 +26,11 @@ const Screens = {
   [navTypes.OFFER]: { screen: OfferScreen },
   [navTypes.MAIN]: { screen: MainScreen },
   [navTypes.USER_PROFILE]: { screen: UserProfile },
+  [navTypes.MY_PROFILE]: { screen: MyProfile },
 };
 
 const RootNavigator = StackNavigator(Screens, {
-  initialRouteName: navTypes.USER_PROFILE,
+  initialRouteName: navTypes.MY_PROFILE,
   ...Platform.select({
     ios: {
       mode: 'card',
