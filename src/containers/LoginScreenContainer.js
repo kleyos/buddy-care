@@ -3,7 +3,7 @@ import LoginScreen from '../screens/loginScreen';
 import { login, logout } from '../modules/auth/actions';
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.loggedIn
+  loggedIn: state.auth.loggedIn
 });
 const mapDispatchToProps = {
   login,

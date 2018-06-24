@@ -16,7 +16,6 @@ export default class MainHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: null,
       selectedIndex: 0
     };
   }

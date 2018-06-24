@@ -30,7 +30,7 @@ const Screens = {
 };
 
 const RootNavigator = StackNavigator(Screens, {
-  initialRouteName: navTypes.MY_PROFILE,
+  initialRouteName: navTypes.LOGIN,
   ...Platform.select({
     ios: {
       mode: 'card',

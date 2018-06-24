@@ -57,7 +57,7 @@ export default class LoginScreen extends Component {
 LoginScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  loggedIn: PropTypes.bool.isRequired
 };
 
 LoginScreen.navigationOptions = {

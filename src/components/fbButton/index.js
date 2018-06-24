@@ -12,6 +12,7 @@ import styles from './styles';
 
 
 export class FbButton extends Component {
+
   responseInfoCallback = (error, result) => {
     if (error) {
       this.props.login(error);
@@ -29,7 +30,8 @@ export class FbButton extends Component {
     } else {
       AccessToken.getCurrentAccessToken().then(data => {
         if (data) {
-          console.log(data, 'facebookdata');
+          // console.log(data, 'facebookdata');
+          // this.setAsyncItem(data.accessToken);
           const infoRequest = new GraphRequest(
             '/me?fields=name,picture.width(500).height(500)',
             null,
@@ -42,8 +44,8 @@ export class FbButton extends Component {
   };
 
   handleFbButtonPress = () => {
-    const { isLoggedIn } = this.props;
-    if (!isLoggedIn) {
+    const { loggedIn } = this.props;
+    if (!loggedIn) {
       LoginManager.logInWithReadPermissions([
         'email',
         'public_profile'
@@ -56,13 +58,14 @@ export class FbButton extends Component {
         }
       );
     } else {
-      // LoginManager.logout();
+      LoginManager.logOut();
       this.props.logout();
     }
 
   };
 
   render() {
+    const { loggedIn } = this.props;
     return (
       <TouchableOpacity
         style={styles.guestBtnContainer}
@@ -70,11 +73,11 @@ export class FbButton extends Component {
       >
         <View style={styles.fbBtn}>
           <Icon name="facebook-f" size={30} color="#fff" />
-          {/* { isLoggedIn
+          { loggedIn
             ? <Text style={styles.btnText}> Log out from Facebook </Text>
             : <Text style={styles.btnText}> Sign in with Facebook </Text>
-          } */}
-          <Text style={styles.btnText}> Sign in with Facebook </Text>
+          }
+          {/* <Text style={styles.btnText}> Sign in with Facebook </Text> */}
         </View>
       </TouchableOpacity>
     );

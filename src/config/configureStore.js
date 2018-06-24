@@ -4,8 +4,8 @@ import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware
 } from 'react-navigation-redux-helpers';
-// import { persistStore, autoRehydrate } from 'redux-persist';
-// import { AsyncStorage } from 'react-native';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { AsyncStorage } from 'react-native';
 import createSagaMiddleware from 'redux-saga';
 import { initStart } from '../modules/application/actions';
 
@@ -26,21 +26,19 @@ export default (rootReducer, rootSaga) => {
   const store = createStore(
     rootReducer,
     composeWithDevTools(
-      // autoRehydrate({
-      //   log: __DEV__
-      // }),
+      autoRehydrate(),
       applyMiddleware(...middleware)
     )
   );
 
-  // persistStore(
-  //   store,
-  //   {
-  //     storage: AsyncStorage,
-  //     whitelist: ['auth']
-  //   },
-  //   () => store.dispatch(initStart())
-  // );
+  persistStore(
+    store,
+    {
+      storage: AsyncStorage,
+      whitelist: ['auth']
+    },
+    () => store.dispatch(initStart())
+  );
 
   sagaMiddleware.run(rootSaga);
 

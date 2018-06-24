@@ -8,8 +8,9 @@ import {
   logoutFailure,
   logoutSuccess
 } from '../modules/auth/actions';
-import navTypes from '../config/configureNavigation';
-
+import { cleanStore } from '../modules/application/actions';
+import { navigate } from '../modules/navigation/actions';
+import { navTypes } from '../config/configureNavigation';
 
 export function* loginWorker({ payload }) {
   try {
@@ -20,6 +21,7 @@ export function* loginWorker({ payload }) {
       yield put(loginFailure(payload.isCancelled));
     } else {
       yield put(loginSuccess(payload));
+      yield put(navigate(navTypes.WISH));
     }
   } catch (er) {
     console.log(er);
@@ -29,9 +31,9 @@ export function* loginWorker({ payload }) {
 
 function* logoutWorker() {
   try {
-    // yield put(logoutSuccess(data));
-    // yield put(navigate(navTypes.LOGIN));
-    // // yield put(cleanStore());
+    yield put(logoutSuccess());
+    yield put(navigate(navTypes.LOGIN));
+    yield put(cleanStore());
   } catch (error) {
     yield put(logoutFailure(error));
   }
