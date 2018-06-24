@@ -1,8 +1,7 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-// import NavigatorContainer from './src/containers/NavigatorContainer';
-import Navigator from './src/config/configureNavigation';
+import Navigator from './src/containers/NavigatorContainer';
 import configureStore from './src/config/configureStore';
 import rootReducer from './src/modules';
 import rootSaga from './src/sagas';

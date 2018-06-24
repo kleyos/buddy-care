@@ -38,7 +38,8 @@ export default handleActions(
     [logoutSuccess]: state => ({
       ...state,
       loading: false,
-      loggedIn: false
+      loggedIn: false,
+      user: null,
     }),
     [logoutFailure]: state => ({
       ...state,
