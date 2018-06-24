@@ -9,17 +9,15 @@ import {
   StatusBar,
   TouchableOpacity
 } from 'react-native';
-import FBSDK from 'react-native-fbsdk';
+
 import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
+import { FbButton } from '../../components/fbButton';
 
-const {
-  LoginButton
-} = FBSDK;
 
 export default class LoginScreen extends Component {
   render() {
-    const { navigation, login } = this.props;
+    const { navigation } = this.props;
     return (
       <ImageBackground
         style={styles.bgContainer}
@@ -39,16 +37,7 @@ export default class LoginScreen extends Component {
             <Text style={styles.welcome}>Marketplace for good acts </Text>
           </View>
           <View style={{ flex: 0.4, justifyContent: 'center' }}>          
-            <TouchableOpacity
-              style={styles.guestBtnContainer}
-              onPress={() => console.log('enter with fb')}
-            >
-              <LoginButton
-                publishPermissions={['publish_actions']}
-                onLoginFinished={(error, result) => login({ error, result })}
-                onLogoutFinished={() => console.log('logout')}
-              />
-            </TouchableOpacity>
+            <FbButton {...this.props}/>
             <TouchableOpacity
               style={styles.guestBtnContainer}
               onPress={() => navigation.navigate(navTypes.WISH)}
@@ -68,6 +57,7 @@ export default class LoginScreen extends Component {
 LoginScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
 };
 
 LoginScreen.navigationOptions = {

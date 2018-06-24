@@ -3,6 +3,9 @@ import {
   login,
   loginSuccess,
   loginFailure,
+  logout,
+  logoutSuccess,
+  logoutFailure
 } from './actions';
 
 const defaultState = {
@@ -13,22 +16,31 @@ const defaultState = {
 
 export default handleActions(
   {
-    [login]: state => {
-      console.log('action login is working');
-      
-      return {...state,
-      loading: true }
-    },
-    [loginSuccess]: (state, { payload }) => {
-      console.log(payload, 'action login succses');
-      return {
-        ...state,
-        loading: false,
-        loggedIn: true,
-        user: payload
-      };
-    },
+    [login]: state => ({
+      ...state,
+      loading: true
+    }),
+    [loginSuccess]: (state, { payload }) => ({
+      ...state,
+      loading: false,
+      loggedIn: true,
+      user: payload
+    }),
     [loginFailure]: state => ({
+      ...state,
+      loading: false,
+      loggedIn: false
+    }),
+    [logout]: state => ({
+      ...state,
+      loading: true
+    }),
+    [logoutSuccess]: state => ({
+      ...state,
+      loading: false,
+      loggedIn: false
+    }),
+    [logoutFailure]: state => ({
       ...state,
       loading: false
     })

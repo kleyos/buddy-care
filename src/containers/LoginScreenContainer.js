@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
 import LoginScreen from '../screens/loginScreen';
-import { login } from '../modules/auth/actions';
+import { login, logout } from '../modules/auth/actions';
 
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.loggedIn
+});
 const mapDispatchToProps = {
-  login
+  login,
+  logout
 };
 
-export default connect(null, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

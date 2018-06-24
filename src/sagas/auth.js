@@ -1,52 +1,25 @@
-import { call, fork, put, take, takeEvery, select } from 'redux-saga/effects';
-import FBSDK from 'react-native-fbsdk';
+import { put, takeEvery } from 'redux-saga/effects';
 
 import {
   login,
   loginSuccess,
   loginFailure,
+  logout,
+  logoutFailure,
+  logoutSuccess
 } from '../modules/auth/actions';
+import navTypes from '../config/configureNavigation';
 
-
-const {
-  AccessToken,
-  GraphRequestManager,
-  GraphRequest
-} = FBSDK;
-
-function responseInfoCallback(error, result) {
-  console.log(error, result)
-  
-  function* callback() {
-    try {
-      if (error) {
-        console.log(`Error fetching data: ${error.toString()}`);
-        yield put(loginFailure(error));
-      } else {
-        yield put(loginSuccess(result));
-      }
-    } catch (er) {
-      console.log(er);
-      yield put(loginFailure(er));
-    }
-  }
-}
 
 export function* loginWorker({ payload }) {
-  const { error, result } = payload;
   try {
-    if (error) {
-      yield put(loginFailure(error));
-    } else if (result.isCancelled) {
+    if (payload.error) {
+      yield put(loginFailure(payload.error));
+    } else if (payload.isCancelled) {
       console.log('login is cancelled.');
-      yield put(loginFailure(result.isCancelled));
+      yield put(loginFailure(payload.isCancelled));
     } else {
-      const infoRequest = new GraphRequest(
-        '/me?fields=name,picture.width(500).height(500)',
-        null,
-        (er, res) => responseInfoCallback(er, res)
-      );
-      new GraphRequestManager().addRequest(infoRequest).start();
+      yield put(loginSuccess(payload));
     }
   } catch (er) {
     console.log(er);
@@ -56,14 +29,14 @@ export function* loginWorker({ payload }) {
 
 function* logoutWorker() {
   try {
-    yield put(logoutSuccess(data));
-    yield put(navigate(navTypes.LOGIN));
-    yield put(cleanStore());
+    // yield put(logoutSuccess(data));
+    // yield put(navigate(navTypes.LOGIN));
+    // // yield put(cleanStore());
   } catch (error) {
     yield put(logoutFailure(error));
   }
 }
 
-export default function* loginWathcer() {
-  yield [takeEvery(login, loginWorker)];
+export default function* authWatcher() {
+  yield [takeEvery(login, loginWorker), takeEvery(logout, logoutWorker)];
 }
