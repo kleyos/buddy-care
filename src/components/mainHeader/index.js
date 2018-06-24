@@ -11,6 +11,7 @@ import { HeaderBackButton } from 'react-navigation';
 
 import { Avatar } from 'react-native-elements';
 import styles from './styles';
+import { navTypes } from '../../config/configureNavigation';
 
 export default class MainHeader extends Component {
   constructor(props) {
@@ -20,9 +21,6 @@ export default class MainHeader extends Component {
     };
   }
     updateIndex = selectedIndex => {
-      const {
-        dispatch, navigate, data, auth: { loggedIn }
-      } = this.props;
       this.setState({ selectedIndex });
       switch (selectedIndex) {
         case 0:
@@ -61,7 +59,7 @@ export default class MainHeader extends Component {
     )
 
     renderHeader = () => {
-      const { auth: { loggedIn = true }} = this.props;
+      const { loggedIn, userAvatar, navigateBack, navigate } = this.props;
       const buttons = ['All', 'Wishes', 'Offers'];
       return (
         <View style={[styles.headerContainer, styles.shadow]}>
@@ -71,7 +69,7 @@ export default class MainHeader extends Component {
           />
           <View style={styles.topContainer}>
             <HeaderBackButton
-              onPress={() => goBack()}
+              onPress={() => navigateBack()}
               tintColor="#fff"
             />
             <Image
@@ -83,8 +81,8 @@ export default class MainHeader extends Component {
               small
               rounded
               containerStyle={{ margin: 5 }}
-              source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
-              onPress={() => console.log('go to profile')}
+              source={{uri: userAvatar }}
+              onPress={() => navigate(navTypes.MY_PROFILE)}
             />}
             {!loggedIn && <View style={{ width: 50 }} />}
           </View>

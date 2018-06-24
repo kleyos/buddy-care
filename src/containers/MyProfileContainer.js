@@ -1,9 +1,24 @@
 import { connect } from 'react-redux';
 import MyProfile from '../screens/myProfile';
-import { login } from '../modules/auth/actions';
+import {
+  getUserName,
+  getUserId,
+  getUserAvatar,
+  isUserLoggedIn
+} from '../modules/auth/selectors';
+import { navigateBack, navigate } from '../modules/navigation/actions';
+
+const mapStateToProps = state => ({
+  loggedIn: isUserLoggedIn(state),
+  userName: getUserName(state),
+  userId: getUserId(state),
+  userAvatar: getUserAvatar(state)
+});
 
 const mapDispatchToProps = {
-  login
+  navigateBack,
+  navigate
 };
 
-export default connect(null, mapDispatchToProps)(MyProfile);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);

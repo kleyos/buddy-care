@@ -4,7 +4,6 @@ import { initStart, initFinish } from '../modules/application/actions';
 import { isUserLoggedIn } from '../modules/auth/selectors';
 import { navTypes } from '../config/configureNavigation';
 import { navigate } from '../modules/navigation/actions';
-import { logout } from '../modules/auth/actions';
 
 export function* startupWorker() {
   try {

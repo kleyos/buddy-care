@@ -70,6 +70,6 @@ export default class MainScreen extends Component {
   }
 }
 
-MainScreen.navigationOptions = ({ navigation, screenProps }) => ({
-  header: <MainHeader navigation={navigation} />
+MainScreen.navigationOptions = () => ({
+  header: <MainHeader />
 });

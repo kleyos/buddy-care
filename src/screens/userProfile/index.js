@@ -56,12 +56,10 @@ export default class userProfile extends Component {
       </View>
     </View>
   )
-  
-  renderContent = () => {
-    //
-  }
+
   render() {
     const data = itemList.map(item => genarateListOfObject(item));
+    
     return [
       <ImageBackground
         key="picture"
@@ -80,6 +78,6 @@ export default class userProfile extends Component {
   }
 }
 
-userProfile.navigationOptions = ({ navigation, screenProps }) => ({
-  header: <HeaderProfile navigation={navigation} />
+userProfile.navigationOptions = () => ({
+  header: <HeaderProfile />
 });

@@ -9,20 +9,11 @@ import {
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 
-import { Avatar } from 'react-native-elements';
 import styles from './styles';
 
 export default class HeaderProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      key: null,
-      selectedIndex: 0
-    };
-  }
-
     renderHeader = () => {
-      const { auth: { loggedIn } } = this.props;
+      const { navigateBack } = this.props;
       return (
         <View style={[styles.headerContainer, styles.shadow]}>
           <StatusBar
@@ -31,7 +22,7 @@ export default class HeaderProfile extends Component {
           />
           <View style={styles.topContainer}>
             <HeaderBackButton
-              onPress={() => this.props.navigation.goBack()}
+              onPress={() => navigateBack()}
               tintColor="#fff"
             />
             <Image
@@ -39,14 +30,7 @@ export default class HeaderProfile extends Component {
               source={require('../../assets/logoLine.png')}
               resizeMode="contain"
             />
-            {loggedIn && <Avatar
-              small
-              rounded
-              containerStyle={{ margin: 5 }}
-              source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
-              onPress={() => console.log('go to profile')}
-            />}
-            {!loggedIn && <View style={{ width: 50 }} />}
+            <View style={{ width: 50 }} />
           </View>
         </View>
       );

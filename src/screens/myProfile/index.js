@@ -124,7 +124,7 @@ export default class MyProfile extends Component {
     </TouchableOpacity>
   )
   renderAddBtns = () => {
-    const { navigation: { navigate } } = this.props;
+    const { navigate } = this.props;
     return [
       <TouchableOpacity
         key="addWish"
@@ -139,7 +139,6 @@ export default class MyProfile extends Component {
       </TouchableOpacity>,
       <TouchableOpacity
         key="addOffer"
-        // style={styles.rouBtn}
         onPress={() => navigate(navTypes.OFFER)}
       >
         <Image
@@ -161,6 +160,8 @@ export default class MyProfile extends Component {
     }
   }
   render() {
+    const { userName, userAvatar } = this.props;
+    
     const data = itemList.map(item => genarateListOfObject(item));
     const buttons = ['Created', 'Applied'];
 
@@ -168,9 +169,9 @@ export default class MyProfile extends Component {
       <ImageBackground
         key="picture"
         style={styles.profilePicture}
-        source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }}
+        source={{ uri: userAvatar }}
       >
-        <Text style={styles.profileName}>{ 'todo: username'.toLocaleUpperCase() }</Text>
+        <Text style={styles.profileName}>{ userName.toLocaleUpperCase() }</Text>
       </ImageBackground>,
       <View style={[styles.tabContainer]} key="tabs">
         <View style={styles.btnContainer}>
@@ -205,6 +206,6 @@ export default class MyProfile extends Component {
   }
 }
 
-MyProfile.navigationOptions = ({ navigation }) => ({
-  header: <HeaderProfile navigation={navigation} />
+MyProfile.navigationOptions = () => ({
+  header: <HeaderProfile />
 });

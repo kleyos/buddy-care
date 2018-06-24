@@ -1,13 +1,23 @@
 import { connect } from 'react-redux';
 import MainHeader from '../components/mainHeader';
-import { login } from '../modules/auth/actions';
+import {
+  getUserName,
+  getUserId,
+  getUserAvatar,
+  isUserLoggedIn
+} from '../modules/auth/selectors';
+import { navigateBack, navigate } from '../modules/navigation/actions';
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  loggedIn: isUserLoggedIn(state),
+  userName: getUserName(state),
+  userId: getUserId(state),
+  userAvatar: getUserAvatar(state)
 });
 
 const mapDispatchToProps = {
-  login
+  navigateBack,
+  navigate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

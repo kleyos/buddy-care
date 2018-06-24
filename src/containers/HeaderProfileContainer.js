@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import HeaderProfile from '../components/headerProfile';
-import { login } from '../modules/auth/actions';
+import { navigateBack } from '../modules/navigation/actions';
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  //
 });
 
 const mapDispatchToProps = {
-  login
+  navigateBack
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderProfile);
