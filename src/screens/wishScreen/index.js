@@ -68,7 +68,6 @@ export default class WishScreen extends Component {
 }
 WishScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired
 };
 
 WishScreen.navigationOptions = {

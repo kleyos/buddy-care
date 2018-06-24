@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import LoginScreen from '../containers/LoginScreenContainer';
+import SplashScreen from '../screens/splashScreen';
 import WishScreen from '../containers/WishScreenContainer';
 import OfferScreen from '../containers/OfferScreenContainer';
 import MainScreen from '../containers/MainScreenContainer';
@@ -11,6 +12,7 @@ import MyProfile from '../containers/MyProfileContainer';
 
 // all navtypes go here
 export const navTypes = {
+  SPLASH: 'splash',
   LOGIN: 'login',
   WISH: 'wish',
   OFFER: 'offer',
@@ -21,6 +23,7 @@ export const navTypes = {
 
 // Screens for MAIN SCREEN STACK NAVIGATOR
 const Screens = {
+  [navTypes.SPLASH]: { screen: SplashScreen },
   [navTypes.LOGIN]: { screen: LoginScreen },
   [navTypes.WISH]: { screen: WishScreen },
   [navTypes.OFFER]: { screen: OfferScreen },
@@ -30,7 +33,7 @@ const Screens = {
 };
 
 const RootNavigator = StackNavigator(Screens, {
-  initialRouteName: navTypes.LOGIN,
+  initialRouteName: navTypes.SPLASH,
   ...Platform.select({
     ios: {
       mode: 'card',
