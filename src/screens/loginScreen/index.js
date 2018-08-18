@@ -18,7 +18,7 @@ import { FbButton } from '../../components/fbButton';
 
 export default class LoginScreen extends Component {
   render() {
-    const { navigate } = this.props;
+    const { navigate, fetchAllUsers } = this.props;
     return (
       <ImageBackground
         style={styles.bgContainer}
@@ -41,7 +41,10 @@ export default class LoginScreen extends Component {
             <FbButton {...this.props}/>
             <TouchableOpacity
               style={styles.guestBtnContainer}
-              onPress={() => navigate(navTypes.MAIN)}
+              onPress={() => {
+                navigate(navTypes.MAIN);
+                fetchAllUsers();
+              }}
             >
               <View style={styles.guestBtn}>
                 <Text style={styles.btnText}> Enter as a guest </Text>
@@ -58,6 +61,7 @@ export default class LoginScreen extends Component {
 LoginScreen.propTypes = {
   navigate: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  fetchAllUsers: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired
 };
 

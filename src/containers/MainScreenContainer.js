@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
 import MainScreen from '../screens/mainScreen';
-import { login } from '../modules/auth/actions';
+import { getAllUsers } from '../modules/main/selectors';
+
+const mapStateToProps = state => ({
+  users: getAllUsers(state)
+});
 
 const mapDispatchToProps = {
-  login
+  //
 };
 
-export default connect(null, mapDispatchToProps)(MainScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
