@@ -3,7 +3,8 @@ import { put, call, takeEvery } from 'redux-saga/effects';
 import {
   fetchAllUsers,
   fetchAllUsersFailure,
-  fetchAllUsersSuccess
+  fetchAllUsersSuccess,
+  filterUsers
 } from '../modules/main/actions';
 import { getUsers } from '../api';
 
@@ -12,10 +13,11 @@ export function* fetchUsersWorker() {
     const response = yield call(getUsers);
     if (response) {
       yield put(fetchAllUsersSuccess(response.cards));
+      yield put(filterUsers(response.cards));
     }
   } catch (er) {
     console.log(er);
-    yield put(fetchAllUsersFailure(er));
+    yield put(fetchAllUsersFailure(null));
   }
 }
 

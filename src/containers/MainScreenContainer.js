@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import MainScreen from '../screens/mainScreen';
-import { getAllUsers } from '../modules/main/selectors';
+import { getFilteredUsers } from '../modules/main/selectors';
 
 const mapStateToProps = state => ({
-  users: getAllUsers(state)
+  users: getFilteredUsers(state)
 });
 
 const mapDispatchToProps = {

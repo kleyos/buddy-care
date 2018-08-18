@@ -18,27 +18,33 @@ export default class MainHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
+      listOfUsers: null
     };
   }
     updateIndex = selectedIndex => {
+      const { users, filterUsers } = this.props;
       this.setState({ selectedIndex });
+      
       switch (selectedIndex) {
         case 0:
-          // if (loggedIn) {
-          //   navigate('AddWish');
-          // } else { navigate('Login'); }
+          this.setState(
+            { listOfUsers: users },
+            () => filterUsers(this.state.listOfUsers)
+          );
           break;
         case 1:
-          // dispatch({ type: 'GET_FILTER_DATA', value: data.fullData });
+          this.setState(
+            { listOfUsers: users.filter(item => item.type === 'Wish') },
+            () => filterUsers(this.state.listOfUsers)
+          );
           break;
         case 2:
-          // dispatch({
-          //   type: 'GET_FILTER_DATA',
-          //   value: data.filter(item => item.type === 'wish')
-          // });
+          this.setState(
+            { listOfUsers: users.filter(item => item.type === 'Offer') },
+            () => filterUsers(this.state.listOfUsers)
+          );
           break;
-
         default: break;
       }
     }
@@ -59,9 +65,10 @@ export default class MainHeader extends Component {
       </TouchableOpacity>
     )
 
-    renderHeader = () => {
+    render() {
       const { loggedIn, userAvatar, navigateBack, navigate } = this.props;
       const buttons = ['All', 'Wishes', 'Offers'];
+      
       return (
         <View style={[styles.headerContainer, styles.shadow]}>
           <StatusBar
@@ -95,8 +102,5 @@ export default class MainHeader extends Component {
 
         </View>
       );
-    }
-    render() {
-      return this.renderHeader();
     }
 }

@@ -2,12 +2,14 @@ import { handleActions } from 'redux-actions';
 import {
   fetchAllUsers,
   fetchAllUsersSuccess,
-  fetchAllUsersFailure
+  fetchAllUsersFailure,
+  filterUsers
 } from './actions';
 
 const defaultState = {
   loading: false,
-  users: null
+  users: null,
+  filteredUsers: null
 };
 
 export default handleActions(
@@ -25,6 +27,10 @@ export default handleActions(
       ...state,
       loading: false,
       users: payload
+    }),
+    [filterUsers]: (state, { payload }) => ({
+      ...state,
+      filteredUsers: payload
     })
   },
   defaultState
