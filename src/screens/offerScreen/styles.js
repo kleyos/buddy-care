@@ -28,8 +28,9 @@ export default StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    marginHorizontal: 35,
+    paddingHorizontal: 35,
     marginBottom: 15,
+    width: '100%'
   },
   input: {
     flex: 1,
@@ -53,7 +54,7 @@ export default StyleSheet.create({
   },
   skipBtn: {
     position: 'absolute',
-    top: 35,
+    top: 30,
     right: 20,
   },
   skipText: {
@@ -63,7 +64,7 @@ export default StyleSheet.create({
   },
   backBtn: {
     position: 'absolute',
-    top: 30,
-    left: 10,
+    top: 15,
+    left: 0,
   }
 });

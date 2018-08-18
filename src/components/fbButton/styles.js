@@ -9,7 +9,7 @@ export default StyleSheet.create({
     height: 50,
     width: 300,
     marginVertical: 10,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 25,
     borderWidth: 1.5,

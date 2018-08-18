@@ -7,7 +7,8 @@ import {
   Image,
   ImageBackground,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 import styles from './styles';
@@ -24,7 +25,7 @@ export default class LoginScreen extends Component {
         source={require('../../assets/loginBg.png')}
       >
         <StatusBar
-          backgroundColor="transparent"
+          backgroundColor={Platform.OS === 'ios' ? 'transparent' : '#7758C4'}
           barStyle="light-content"
         />
         <View style={styles.container}>
@@ -40,7 +41,7 @@ export default class LoginScreen extends Component {
             <FbButton {...this.props}/>
             <TouchableOpacity
               style={styles.guestBtnContainer}
-              onPress={() => navigate(navTypes.WISH)}
+              onPress={() => navigate(navTypes.MAIN)}
             >
               <View style={styles.guestBtn}>
                 <Text style={styles.btnText}> Enter as a guest </Text>

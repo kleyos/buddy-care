@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import WishScreen from '../screens/wishScreen';
-import { login } from '../modules/auth/actions';
+import { navigateBack, navigate } from '../modules/navigation/actions';
 
 const mapDispatchToProps = {
-  login
+  navigateBack,
+  navigate
 };
 
 export default connect(null, mapDispatchToProps)(WishScreen);

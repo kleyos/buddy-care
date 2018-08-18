@@ -15,13 +15,17 @@ import { genarateListOfObject } from '../../config/utils';
 import styles from './styles';
 
 export default class MainScreen extends Component {
+
   keyExtractor = (item, i) => i;
 
   renderCard = (el, i) => (
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <Image
         style={styles.line}
-        source={el.type === 'wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
+        source={el.type === 'wish'
+        ? require('../../assets/topLineAp.png')
+        : require('../../assets/topLineH.png')
+      }
         resizeMode="contain"
       />
       <View style={styles.itemContent}>
@@ -48,7 +52,10 @@ export default class MainScreen extends Component {
           >
             <Image
               style={styles.btn}
-              source={el.type === 'wish' ? require('../../assets/helpBtn.png') : require('../../assets/applyBtn.png')}
+              source={el.type === 'wish' 
+                ? require('../../assets/helpBtn.png')
+                : require('../../assets/applyBtn.png')
+              }
               resizeMode="contain"
             />
           </TouchableOpacity>

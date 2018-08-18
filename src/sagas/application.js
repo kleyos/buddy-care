@@ -1,5 +1,5 @@
 import { takeEvery, put, select } from 'redux-saga/effects';
-
+import { AsyncStorage } from 'react-native';
 import { initStart, initFinish } from '../modules/application/actions';
 import { isUserLoggedIn } from '../modules/auth/selectors';
 import { navTypes } from '../config/configureNavigation';
@@ -9,7 +9,7 @@ export function* startupWorker() {
   try {
     // TODO: Rework the logic when signup/signin pages are done
     const userLoggedIn = yield select(isUserLoggedIn);
-
+    console.log('AsyncStorage', AsyncStorage.getItem.auth)
     if (userLoggedIn) {
       yield put(navigate(navTypes.MAIN));
     } else {

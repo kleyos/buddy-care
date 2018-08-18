@@ -28,8 +28,9 @@ export default StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    marginHorizontal: 35,
+    paddingHorizontal: 35,
     marginBottom: 15,
+    width: '100%'
   },
   input: {
     flex: 1,
@@ -43,7 +44,7 @@ export default StyleSheet.create({
     color: '#000',
     fontSize: 12,
     backgroundColor: 'transparent',
-    textAlign: 'right',
+    textAlign: 'right'
   },
   btnText: {
     color: '#fff',
@@ -53,8 +54,13 @@ export default StyleSheet.create({
   },
   skipBtn: {
     position: 'absolute',
-    top: 35,
-    right: 20,
+    top: 30,
+    right: 20
+  },
+  backBtn: {
+    position: 'absolute',
+    top: 15,
+    left: 0
   },
   skipText: {
     color: '#fff',

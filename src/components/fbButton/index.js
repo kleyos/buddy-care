@@ -17,6 +17,7 @@ export class FbButton extends Component {
     if (error) {
       this.props.login(error);
     } else {
+      console.log(result, 'result');
       this.props.login(result);
     }
   }
@@ -30,7 +31,7 @@ export class FbButton extends Component {
     } else {
       AccessToken.getCurrentAccessToken().then(data => {
         if (data) {
-          // console.log(data, 'facebookdata');
+          console.log(data, 'facebookdata');
           // this.setAsyncItem(data.accessToken);
           const infoRequest = new GraphRequest(
             '/me?fields=name,picture.width(500).height(500)',
@@ -77,7 +78,6 @@ export class FbButton extends Component {
             ? <Text style={styles.btnText}> Log out from Facebook </Text>
             : <Text style={styles.btnText}> Sign in with Facebook </Text>
           }
-          {/* <Text style={styles.btnText}> Sign in with Facebook </Text> */}
         </View>
       </TouchableOpacity>
     );

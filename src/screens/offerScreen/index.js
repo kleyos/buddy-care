@@ -7,32 +7,56 @@ import {
   ImageBackground,
   StatusBar,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Platform,
+  Keyboard
 } from 'react-native';
 import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
 
 export default class OfferScreen extends Component {
   state={
-    text: ''
+    text: '',
+    isKeyboard: false,
   }
-  render() {
-    const { navigation: { navigate, goBack } } = this.props;
 
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({ isKeyboard: true });
+  }
+
+  _keyboardDidHide = () => {
+    this.setState({ isKeyboard: false })
+  }
+  
+  render() {
+    const { navigate, navigateBack } = this.props;
+    const { isKeyboard } = this.state;
     return (
       <View style={styles.container}>
-        <View style={{ }}>
-          <ImageBackground
-            style={styles.bgImage}
-            source={require('../../assets/offerBg.png')}
-          >
-            <StatusBar
-              backgroundColor="transparent"
-              barStyle="light-content"
-            />
-          </ImageBackground>
-          <Text style={styles.text}> What could you offer right now? </Text>
-        </View>
+        {!isKeyboard &&
+          <View style={{ }}>
+            <ImageBackground
+              style={styles.bgImage}
+              source={require('../../assets/offerBg.png')}
+            >
+              <StatusBar
+                backgroundColor={Platform.OS === 'ios' ? 'transparent' : '#8BB6F0'}
+                barStyle="light-content"
+              />
+            </ImageBackground>
+            <Text style={styles.text}> What could you offer right now? </Text>
+          </View>
+        }
         <View style={{ flex: 1, alignItems: 'center', marginVertical: 10 }}>
           <View style={styles.inputContainer}>
             <TextInput
@@ -43,6 +67,8 @@ export default class OfferScreen extends Component {
               placeholderTextColor="#5F5D70"
               onChangeText={text => this.setState({ text })}
               value={this.state.text}
+              underlineColorAndroid="transparent"
+              textAlignVertical="top"
             />
             <Text style={styles.charText}>{this.state.text.length}/500</Text>
           </View>
@@ -57,30 +83,32 @@ export default class OfferScreen extends Component {
             </ImageBackground>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.skipBtn}
-          onPress={() => console.log('skip')}
-        >
-          <Text style={styles.skipText}>Skip</Text>
-        </TouchableOpacity>
-        <View style={styles.backBtn}>
-          <HeaderBackButton 
-            tintColor="#fff"
-            onPress={() => goBack()}
-          />
-        </View>
+        {!isKeyboard &&
+          <TouchableOpacity
+            style={styles.skipBtn}
+            onPress={() => navigate(navTypes.MAIN)}
+          >
+            <Text style={styles.skipText}>Skip</Text>
+          </TouchableOpacity>
+        }
+        {!isKeyboard &&
+          <View style={styles.backBtn}>
+            <HeaderBackButton
+              tintColor="#fff"
+              onPress={() => navigateBack()}
+            />
+          </View>
+        }
       </View>
     );
   }
 }
 OfferScreen.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired
+  navigate: PropTypes.func.isRequired,
+  navigateBack: PropTypes.func.isRequired
+
 };
 
 OfferScreen.navigationOptions = {
   header: null
-  // headerStyle: {
-  //   backgroundColor: 'transparent'
-  // }
 };
