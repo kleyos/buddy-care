@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { width } = Dimensions;
+const { width } = Dimensions.get('screen');
 
 export default StyleSheet.create({
   container: {
@@ -11,7 +11,8 @@ export default StyleSheet.create({
     flex: 1,
     marginHorizontal: 10,
     marginVertical: 8,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    elevation: 2
   },
   itemContent: {
     padding: 10

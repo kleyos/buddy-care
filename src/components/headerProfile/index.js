@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import {
   View,
   Image,
-  Text,
   StatusBar,
-  TouchableOpacity
+  Platform
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 
@@ -17,7 +16,7 @@ export default class HeaderProfile extends Component {
       return (
         <View style={[styles.headerContainer, styles.shadow]}>
           <StatusBar
-            backgroundColor="transparent"
+            backgroundColor={Platform.OS === 'ios' ? 'transparent' : '#7758C4'}
             barStyle="light-content"
           />
           <View style={styles.topContainer}>

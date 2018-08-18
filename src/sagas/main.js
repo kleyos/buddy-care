@@ -4,9 +4,12 @@ import {
   fetchAllUsers,
   fetchAllUsersFailure,
   fetchAllUsersSuccess,
+  fetchUserProfile,
+  fetchUserProfileSuccess,
+  fetchUserProfileFailure,
   filterUsers
 } from '../modules/main/actions';
-import { getUsers } from '../api';
+import { getUsers, getUserProfile } from '../api';
 
 export function* fetchUsersWorker() {
   try {
@@ -21,6 +24,20 @@ export function* fetchUsersWorker() {
   }
 }
 
+export function* fetchUserProfileWorker({ payload }) {
+  try {
+    const response = yield call(getUserProfile, payload);
+    if (response) {
+      yield put(fetchUserProfileSuccess(response.user));
+    }
+  } catch (er) {
+    console.log(er);
+    yield put(fetchUserProfileFailure(null));
+  }
+}
 export default function* mainWatcher() {
-  yield [takeEvery(fetchAllUsers, fetchUsersWorker)];
+  yield [
+    takeEvery(fetchAllUsers, fetchUsersWorker),
+    takeEvery(fetchUserProfile, fetchUserProfileWorker)
+  ];
 }

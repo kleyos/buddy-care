@@ -3,12 +3,16 @@ import {
   fetchAllUsers,
   fetchAllUsersSuccess,
   fetchAllUsersFailure,
+  fetchUserProfile,
+  fetchUserProfileSuccess,
+  fetchUserProfileFailure,
   filterUsers
 } from './actions';
 
 const defaultState = {
   loading: false,
   users: null,
+  profileUser: null,
   filteredUsers: null
 };
 
@@ -27,6 +31,20 @@ export default handleActions(
       ...state,
       loading: false,
       users: payload
+    }),
+    [fetchUserProfile]: state => ({
+      ...state,
+      loading: true
+    }),
+    [fetchUserProfileSuccess]: (state, { payload }) => ({
+      ...state,
+      loading: false,
+      profileUser: payload
+    }),
+    [fetchUserProfileFailure]: (state, { payload }) => ({
+      ...state,
+      loading: false,
+      profileUser: payload
     }),
     [filterUsers]: (state, { payload }) => ({
       ...state,

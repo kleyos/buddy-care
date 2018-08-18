@@ -1,6 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width, height } = Dimensions;
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   headerContainer: {
