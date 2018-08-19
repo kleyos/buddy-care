@@ -77,6 +77,7 @@ export default class MainScreen extends Component {
     const { users } = this.props;
     return (
       <FlatList
+        key="cardList"
         style={styles.container}
         data={users}
         keyExtractor={this.keyExtractor}

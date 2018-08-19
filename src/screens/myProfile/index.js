@@ -7,7 +7,6 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import { Avatar } from 'react-native-elements';
 import _ from 'lodash';
 
 import HeaderProfile from '../../containers/HeaderProfileContainer';
@@ -26,12 +25,12 @@ export default class MyProfile extends Component {
   }
   keyExtractor = (item, i) => i;
 
-  renderCreatedCard = (el, i) => (
+  renderCard = (el, i) => (
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <Image
         style={styles.line}
         source={el.type === 'wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
-        resizeMode="contain"
+        resizeMode="stretch"
       />
       <View style={styles.itemContent}>
         <Text style={styles.itemText}> {el.text}</Text>
@@ -68,45 +67,6 @@ export default class MyProfile extends Component {
     </View>
   )
 
-  renderAppliedCard = (el, i) => (
-    <View style={[styles.item, styles.itemShadow]} key={i}>
-      <Image
-        style={styles.line}
-        source={el.type === 'wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
-        resizeMode="contain"
-      />
-      <View style={styles.itemContent}>
-        <View style={styles.itemRow}>
-          <Avatar
-            medium
-            rounded
-            source={{ uri: el.pic }}
-            onPress={() => console.log('profile')}
-            activeOpacity={0.7}
-          />
-          <Text style={styles.itemName}>{el.name}</Text>
-        </View>
-        <Text style={styles.itemText}> {el.text}</Text>
-        <View style={styles.itemRowBtn}>
-          <Image
-            style={el.type === 'wish' ? styles.itemWish : styles.itemOffer}
-            source={el.type === 'wish' ? require('../../assets/wish.png') : require('../../assets/offer.png')}
-            resizeMode="cover"
-          />
-          <TouchableOpacity
-            style={styles.itemBtn}
-            onPress={() => console.log('apply')}
-          >
-            <Image
-              style={styles.btn}
-              source={require('../../assets/cancelBtn.png')}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  )
   renderTab = (item, i) => (
     <TouchableOpacity
       style={{ flex: 1 }}
@@ -149,21 +109,10 @@ export default class MyProfile extends Component {
       </TouchableOpacity>
     ];
   };
-  renderContent = (item, i) => {
-    const { selectedIndex } = this.state;
-    switch (selectedIndex) {
-      case 0:
-        return this.renderCreatedCard(item, i);
-      case 1:
-        return this.renderAppliedCard(item, i);
-      default:
-    }
-  }
   render() {
     const { userName, userAvatar } = this.props;
     
     const data = itemList.map(item => genarateListOfObject(item));
-    const buttons = ['Created', 'Applied'];
 
     return [
       <ImageBackground
@@ -173,18 +122,13 @@ export default class MyProfile extends Component {
       >
         <Text style={styles.profileName}>{ userName.toLocaleUpperCase() }</Text>
       </ImageBackground>,
-      <View style={[styles.tabContainer]} key="tabs">
-        <View style={styles.btnContainer}>
-          {buttons.map((item, i) => this.renderTab(item, i))}
-        </View>
-      </View>,
       <View style={styles.divider} key="divider" />,
       <FlatList
         key="list"
         style={styles.container}
         data={_.flattenDeep(data)}
         keyExtractor={this.keyExtractor}
-        renderItem={({ item, i }) => this.renderContent(item, i)}
+        renderItem={({ item, i }) => this.renderCard(item, i)}
       />,
       <TouchableOpacity
         key="add"

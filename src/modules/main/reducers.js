@@ -11,7 +11,7 @@ import {
 
 const defaultState = {
   loading: false,
-  users: null,
+  cards: null,
   profileUser: null,
   filteredUsers: null
 };
@@ -25,12 +25,12 @@ export default handleActions(
     [fetchAllUsersSuccess]: (state, { payload }) => ({
       ...state,
       loading: false,
-      users: payload
+      cards: payload
     }),
     [fetchAllUsersFailure]: (state, { payload }) => ({
       ...state,
       loading: false,
-      users: payload
+      cards: payload
     }),
     [fetchUserProfile]: state => ({
       ...state,

@@ -73,7 +73,7 @@ export default class OfferScreen extends Component {
             <Text style={styles.charText}>{this.state.text.length}/500</Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigate(navTypes)}
+            onPress={() => navigate(navTypes.MAIN)}
           >
             <ImageBackground
               style={styles.btnImage}

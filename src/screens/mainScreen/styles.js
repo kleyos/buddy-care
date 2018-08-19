@@ -1,11 +1,19 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F7F7F7'
+  },
+  modal: {
+    position: 'absolute',
+    width,
+    height,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(119, 88, 196, 0.3)'
   },
   item: {
     flex: 1,

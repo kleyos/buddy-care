@@ -5,7 +5,7 @@ import { navigateBack, navigate } from '../modules/navigation/actions';
 import { fetchUserProfile } from '../modules/main/actions';
 
 const mapStateToProps = state => ({
-  users: getFilteredUsers(state)
+  users: getFilteredUsers(state),
 });
 
 const mapDispatchToProps = {
