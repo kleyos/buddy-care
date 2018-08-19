@@ -2,7 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 import { initStart, initFinish } from '../modules/application/actions';
 import { isUserLoggedIn } from '../modules/auth/selectors';
 import { navTypes } from '../config/configureNavigation';
-import { navigate } from '../modules/navigation/actions';
+import { navigate, navigateWithReset } from '../modules/navigation/actions';
 import { fetchAllUsers } from '../modules/main/actions';
 
 export function* startupWorker() {
@@ -11,7 +11,7 @@ export function* startupWorker() {
     const userLoggedIn = yield select(isUserLoggedIn);
     if (userLoggedIn) {
       yield put(fetchAllUsers());
-      yield put(navigate(navTypes.MAIN));
+      yield put(navigateWithReset(navTypes.MAIN));
     } else {
       yield put(navigate(navTypes.LOGIN));
     }
