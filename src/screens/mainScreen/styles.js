@@ -13,7 +13,7 @@ export default StyleSheet.create({
     height,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(119, 88, 196, 0.3)'
+    backgroundColor: 'rgba(119, 88, 196, 0.2)'
   },
   item: {
     flex: 1,

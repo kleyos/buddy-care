@@ -9,10 +9,9 @@ import {
   Platform
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
-
 import { Avatar } from 'react-native-elements';
-import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
+import styles from './styles';
 
 export default class MainHeader extends Component {
   constructor(props) {
@@ -25,7 +24,6 @@ export default class MainHeader extends Component {
     updateIndex = selectedIndex => {
       const { users, filterUsers } = this.props;
       this.setState({ selectedIndex });
-      
       switch (selectedIndex) {
         case 0:
           this.setState(

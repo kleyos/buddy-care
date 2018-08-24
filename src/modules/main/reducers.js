@@ -11,7 +11,7 @@ import {
 
 const defaultState = {
   loading: false,
-  users: null,
+  users: [],
   profileUser: null,
   filteredUsers: null
 };

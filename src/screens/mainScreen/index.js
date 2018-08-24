@@ -4,12 +4,13 @@ import {
   FlatList,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import { navTypes } from '../../config/configureNavigation';
 import MainHeader from '../../containers/MainHeaderContainer';
 import styles from './styles';
-import { navTypes } from '../../config/configureNavigation';
 
 export default class MainScreen extends Component {
   keyExtractor = (item, i) => i;
@@ -74,15 +75,22 @@ export default class MainScreen extends Component {
   }
 
   render() {
-    const { users } = this.props;
+    const { users, loading } = this.props;
     return (
-      <FlatList
-        key="cardList"
-        style={styles.container}
-        data={users}
-        keyExtractor={this.keyExtractor}
-        renderItem={({ item, i }) => this.renderCard(item, i)}
-      />
+      <View style={{ flex: 1 }}>
+        <FlatList
+          key="cardList"
+          style={styles.container}
+          data={users}
+          keyExtractor={this.keyExtractor}
+          renderItem={({ item, i }) => this.renderCard(item, i)}
+        />
+        {loading &&
+          <View style={styles.modal}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        }
+      </View>
     );
   }
 }
