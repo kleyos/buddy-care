@@ -84,14 +84,6 @@ export default class OfferScreen extends Component {
           </TouchableOpacity>
         </View>
         {!isKeyboard &&
-          <TouchableOpacity
-            style={styles.skipBtn}
-            onPress={() => navigate(navTypes.MAIN)}
-          >
-            <Text style={styles.skipText}>Skip</Text>
-          </TouchableOpacity>
-        }
-        {!isKeyboard &&
           <View style={styles.backBtn}>
             <HeaderBackButton
               tintColor="#fff"

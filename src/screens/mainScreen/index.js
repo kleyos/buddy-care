@@ -8,8 +8,10 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import MaterialInitials from 'react-native-material-initials/native';
 import { navTypes } from '../../config/configureNavigation';
 import MainHeader from '../../containers/MainHeaderContainer';
+import { randomColor } from '../../config/utils';
 import styles from './styles';
 
 export default class MainScreen extends Component {
@@ -30,18 +32,28 @@ export default class MainScreen extends Component {
         />
         <View style={styles.itemContent}>
           <View style={styles.itemRow}>
-            <Avatar
+            {el.owner.profile.avatar_url
+            ? <Avatar
               medium
               rounded
               source={{ uri: el.owner.profile.avatar_url }}
               onPress={
-                () => {
-                navigate(navTypes.USER_PROFILE, { ownerId: el.owner.id });
-                fetchUserProfile(el.owner.id);
+                  () => {
+                  navigate(navTypes.USER_PROFILE, { ownerId: el.owner.id });
+                  fetchUserProfile(el.owner.id);
+                  }
                 }
-              }
               activeOpacity={0.7}
             />
+            : <MaterialInitials
+              style={{ alignSelf: 'center' }}
+              backgroundColor={`#${randomColor()}`}
+              color="white"
+              size={50}
+              text={`${el.owner.profile.first_name} ${el.owner.profile.last_name}`}
+              single={false}
+            />
+            }
             <Text style={styles.itemName}>
               {el.owner.profile.first_name}
               {' '}

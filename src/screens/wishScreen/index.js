@@ -12,9 +12,9 @@ import {
   Keyboard
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
-
-import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
+import api from '../../api';
+import styles from './styles';
 
 export default class WishScreen extends Component {
   
@@ -39,6 +39,11 @@ export default class WishScreen extends Component {
 
   _keyboardDidHide = () => {
     this.setState({ isKeyboard: false })
+  }
+  handleSaveButtonPress = () => {
+    if (this.state.text) {
+      //
+    }
   }
   render() {
     const { navigate, navigateBack } = this.props;
@@ -86,14 +91,6 @@ export default class WishScreen extends Component {
             </ImageBackground>
           </TouchableOpacity>
         </View>
-        {!isKeyboard &&
-          <TouchableOpacity
-            style={styles.skipBtn}
-            onPress={() => navigate(navTypes.OFFER)}
-          >
-            <Text style={styles.skipText}>Skip</Text>
-          </TouchableOpacity>
-        }
         {!isKeyboard &&
           <View style={styles.backBtn}>
             <HeaderBackButton
