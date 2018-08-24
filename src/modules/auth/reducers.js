@@ -5,13 +5,15 @@ import {
   loginFailure,
   logout,
   logoutSuccess,
-  logoutFailure
+  logoutFailure,
+  setFirstWish
 } from './actions';
 
 const defaultState = {
   loading: false,
   loggedIn: false,
   user: null,
+  firstWish: false
 };
 
 export default handleActions(
@@ -44,6 +46,10 @@ export default handleActions(
     [logoutFailure]: state => ({
       ...state,
       loading: false
+    }),
+    [setFirstWish]: state => ({
+      ...state,
+      firstWish: false
     })
   },
   defaultState

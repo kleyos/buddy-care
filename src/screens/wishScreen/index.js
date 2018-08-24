@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 import { navTypes } from '../../config/configureNavigation';
-import api from '../../api';
 import styles from './styles';
 
 export default class WishScreen extends Component {
@@ -21,6 +20,7 @@ export default class WishScreen extends Component {
   state={
     text: '',
     isKeyboard: false,
+    warning: false
   }
 
   componentDidMount() {
@@ -40,14 +40,21 @@ export default class WishScreen extends Component {
   _keyboardDidHide = () => {
     this.setState({ isKeyboard: false })
   }
+
+  handleTextChange = text => {
+    this.setState({ text, warning: false });
+  }
+
   handleSaveButtonPress = () => {
     if (this.state.text) {
-      //
+      this.props.navigate(navTypes.OFFER);
+    } else {
+      this.setState({ warning: true });
     }
   }
   render() {
-    const { navigate, navigateBack } = this.props;
-    const { isKeyboard } = this.state;
+    const { navigateBack } = this.props;
+    const { isKeyboard, warning } = this.state;
 
     return (
       <View style={styles.container}>
@@ -67,13 +74,18 @@ export default class WishScreen extends Component {
         }
         <View style={{ flex: 1, alignItems: 'center', marginVertical: 10 }}>
           <View style={styles.inputContainer}>
+            {warning &&
+              <Text style={styles.warningText}>
+                Please enter Your wish!
+              </Text>
+            }
             <TextInput
               style={styles.input}
               multiline
               maxLength={500}
               placeholder="Here you can say what you are really-really dreaming about..."
               placeholderTextColor="#5F5D70"
-              onChangeText={text => this.setState({ text })}
+              onChangeText={this.handleTextChange}
               value={this.state.text}
               underlineColorAndroid="transparent"
               textAlignVertical="top"
@@ -81,7 +93,7 @@ export default class WishScreen extends Component {
             <Text style={styles.charText}>{this.state.text.length}/500</Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigate(navTypes.OFFER)}
+            onPress={this.handleSaveButtonPress}
           >
             <ImageBackground
               style={styles.btnImage}

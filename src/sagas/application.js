@@ -1,17 +1,20 @@
 import { takeEvery, put, select } from 'redux-saga/effects';
 import { initStart, initFinish } from '../modules/application/actions';
-import { isUserLoggedIn } from '../modules/auth/selectors';
+import { isUserLoggedIn, isFirstWish } from '../modules/auth/selectors';
 import { navTypes } from '../config/configureNavigation';
 import { navigate, navigateWithReset } from '../modules/navigation/actions';
 import { fetchAllUsers } from '../modules/main/actions';
 
 export function* startupWorker() {
   try {
-    // TODO: Rework the logic when signup/signin pages are done
     const userLoggedIn = yield select(isUserLoggedIn);
-    if (userLoggedIn) {
-      yield put(fetchAllUsers());
+    const firstWish = yield select(isFirstWish);
+    yield put(fetchAllUsers());
+    
+    if (userLoggedIn && firstWish) {
       yield put(navigateWithReset(navTypes.MAIN));
+    } else if (userLoggedIn && !firstWish) {
+      yield put(navigate(navTypes.WISH));
     } else {
       yield put(navigate(navTypes.LOGIN));
     }

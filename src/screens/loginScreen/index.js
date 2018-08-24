@@ -42,8 +42,7 @@ export default class LoginScreen extends Component {
             <TouchableOpacity
               style={styles.guestBtnContainer}
               onPress={() => {
-                navigate(navTypes.MAIN);
-                fetchAllUsers();
+                navigate(navTypes.WISH);
               }}
             >
               <View style={styles.guestBtn}>

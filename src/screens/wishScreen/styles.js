@@ -46,6 +46,13 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     textAlign: 'right'
   },
+  warningText: {
+    color: 'red',
+    fontSize: 12,
+    backgroundColor: 'transparent',
+    textAlign: 'center'
+
+  },
   btnText: {
     color: '#fff',
     fontSize: 16,

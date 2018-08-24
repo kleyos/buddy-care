@@ -18,6 +18,7 @@ export default class OfferScreen extends Component {
   state={
     text: '',
     isKeyboard: false,
+    warning: false
   }
 
   componentDidMount() {
@@ -35,12 +36,25 @@ export default class OfferScreen extends Component {
   }
 
   _keyboardDidHide = () => {
-    this.setState({ isKeyboard: false })
+    this.setState({ isKeyboard: false });
+  }
+
+  handleTextChange = text => {
+    this.setState({ text, warning: false });
+  }
+
+  handleSaveButtonPress = () => {
+    if (this.state.text) {
+      this.props.navigate(navTypes.OFFER);
+      this.props.setFirstWish();
+    } else {
+      this.setState({ warning: true });
+    }
   }
   
   render() {
-    const { navigate, navigateBack } = this.props;
-    const { isKeyboard } = this.state;
+    const { navigateBack } = this.props;
+    const { isKeyboard, warning } = this.state;
     return (
       <View style={styles.container}>
         {!isKeyboard &&
@@ -59,13 +73,18 @@ export default class OfferScreen extends Component {
         }
         <View style={{ flex: 1, alignItems: 'center', marginVertical: 10 }}>
           <View style={styles.inputContainer}>
+            {warning &&
+              <Text style={styles.warningText}>
+                Please enter Your offer!
+              </Text>
+            }
             <TextInput
               style={styles.input}
               multiline
               maxLength={500}
               placeholder="Here you can say what you could offer for somebody else…"
               placeholderTextColor="#5F5D70"
-              onChangeText={text => this.setState({ text })}
+              onChangeText={this.handleTextChange}
               value={this.state.text}
               underlineColorAndroid="transparent"
               textAlignVertical="top"
@@ -73,7 +92,7 @@ export default class OfferScreen extends Component {
             <Text style={styles.charText}>{this.state.text.length}/500</Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigate(navTypes.MAIN)}
+            onPress={this.handleSaveButtonPress}
           >
             <ImageBackground
               style={styles.btnImage}
@@ -97,8 +116,8 @@ export default class OfferScreen extends Component {
 }
 OfferScreen.propTypes = {
   navigate: PropTypes.func.isRequired,
-  navigateBack: PropTypes.func.isRequired
-
+  navigateBack: PropTypes.func.isRequired,
+  setFirstWish: PropTypes.func.isRequired
 };
 
 OfferScreen.navigationOptions = {
