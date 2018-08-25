@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 
 import {
   login,
@@ -11,16 +11,18 @@ import {
 import { cleanStore } from '../modules/application/actions';
 import { navigate } from '../modules/navigation/actions';
 import { navTypes } from '../config/configureNavigation';
+import { createUser } from '../api';
 
 export function* loginWorker({ payload }) {
   try {
     if (payload.error) {
       yield put(loginFailure(payload.error));
     } else if (payload.isCancelled) {
-      console.log('login is cancelled.');
       yield put(loginFailure(payload.isCancelled));
-    } else {
-      yield put(loginSuccess(payload));
+    } else if (payload.token) {
+      const result = yield call(createUser, payload.token);
+      
+      yield put(loginSuccess(result));
       yield put(navigate(navTypes.WISH));
     }
   } catch (er) {

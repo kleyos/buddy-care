@@ -26,7 +26,7 @@ export default handleActions(
       ...state,
       loading: false,
       loggedIn: true,
-      user: payload
+      user: { ...payload }
     }),
     [loginFailure]: state => ({
       ...state,
@@ -49,7 +49,7 @@ export default handleActions(
     }),
     [setFirstWish]: state => ({
       ...state,
-      firstWish: false
+      firstWish: true
     })
   },
   defaultState

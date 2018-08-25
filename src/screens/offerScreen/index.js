@@ -45,8 +45,8 @@ export default class OfferScreen extends Component {
 
   handleSaveButtonPress = () => {
     if (this.state.text) {
-      this.props.navigate(navTypes.OFFER);
       this.props.setFirstWish();
+      this.props.navigate(navTypes.MAIN);
     } else {
       this.setState({ warning: true });
     }

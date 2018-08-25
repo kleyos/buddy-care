@@ -6,7 +6,7 @@ const post = (url, data) =>
   fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      "Content-Type": "application/json"
     },
     body: data
   }).then(res => res.json());
@@ -15,7 +15,7 @@ const put = (url, data) =>
   fetch(url, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      "Content-Type": "application/json"
     },
     body: data
   }).then(res => res.json());
@@ -23,9 +23,6 @@ const put = (url, data) =>
 const del = url =>
   fetch(url, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
   }).then(res => res.json());
 
 export const getUsers = () => {
@@ -40,17 +37,17 @@ export const getUserProfile = userId => {
 
 export const createUser = token => {
   const url = `${API_URL}/sessions`;
-  return post(url, { access_token: token });
+  return post(url, JSON.stringify({ access_token: token }));
 };
 
 export const create = (text, type) => {
   const url = `${API_URL}/${type}`;
-  return post(url, { text });
+  return post(url, JSON.stringify({ text }));
 };
 
 export const edit = (text, type, id) => {
   const url = `${API_URL}/${type}/:${id}`;
-  return put(url, { text });
+  return put(url, JSON.stringify({ text }));
 };
 
 export const apply = (id, type) => {
