@@ -39,7 +39,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -51,19 +51,19 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb103581103763155</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>103581103763155</string>
-	<key>FacebookDisplayName</key>
-	<string>BuddyCare</string>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb255856968546196</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>255856968546196</string>
+  <key>FacebookDisplayName</key>
+  <string>BuddyCare</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
