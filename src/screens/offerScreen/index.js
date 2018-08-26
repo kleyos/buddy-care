@@ -74,7 +74,7 @@ export default class OfferScreen extends Component {
           types: 'offers',
           token: userToken
         });
-        navigateBack();
+        navigate(navTypes.MY_PROFILE, { addBtn: false });
       } else if (isFirstWish && flag === 'edit') {
         editCard({
           text,

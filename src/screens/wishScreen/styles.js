@@ -27,10 +27,10 @@ export default StyleSheet.create({
     height: 45,
   },
   inputContainer: {
-    flex: 1,
+    flexGrow: 1,
     paddingHorizontal: 35,
     marginBottom: 15,
-    width: '100%'
+    width: '100%',
   },
   input: {
     flex: 1,
@@ -38,7 +38,8 @@ export default StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#FBFAFF',
     borderRadius: 5,
-    padding: 10
+    padding: 10,
+    maxHeight: height / 2
   },
   charText: {
     color: '#000',

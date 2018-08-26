@@ -4,7 +4,8 @@ import {
   getUserName,
   getUserId,
   getUserAvatar,
-  isUserLoggedIn
+  isUserLoggedIn,
+  getUserToken
 } from '../modules/auth/selectors';
 import { navigateBack, navigate } from '../modules/navigation/actions';
 import { getCardsById } from '../modules/main/selectors';
@@ -15,6 +16,7 @@ const mapStateToProps = state => ({
   userName: getUserName(state),
   userId: getUserId(state),
   userAvatar: getUserAvatar(state),
+  userToken: getUserToken(state),
   cards: getCardsById(state, getUserId(state))
 });
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -16,14 +17,22 @@ export default class MyProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAddBtns: false
+      isAddBtns: this.props.navigation.state.params.addBtn || false
     };
   }
   keyExtractor = (item, i) => i;
   
   handleEditPress = (type, text, id) => {
+    const { navigate } = this.props;
     const upperCaseType = type.toLocaleUpperCase();
-    this.props.navigate(navTypes[upperCaseType], { text, flag: 'edit', id });
+    
+    navigate(navTypes[upperCaseType], { text, flag: 'edit', id });
+  }
+  handleClosePress = (type, id) => {
+    const { cancelCard, userToken } = this.props;
+    const types = type === 'Wish' ? 'wishes' : 'offers';
+    
+    cancelCard({ types, id, token: userToken });
   }
   
   renderCard = (el, i) => (
@@ -44,7 +53,7 @@ export default class MyProfile extends Component {
           <View style={styles.itemRow}>
             <TouchableOpacity
               style={styles.itemBtn}
-              onPress={() => this.handleEditPress("wish", "bla")}
+              onPress={() => this.handleClosePress(el.type, el.id)}
             >
               <Image
                 style={styles.btn}
@@ -131,6 +140,15 @@ export default class MyProfile extends Component {
     ];
   }
 }
+MyProfile.propTypes = {
+  navigate: PropTypes.func.isRequired,
+  navigation: PropTypes.func.isRequired,
+  cancelCard: PropTypes.func.isRequired,
+  userToken: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+  cards: PropTypes.array.isRequired
+};
 
 MyProfile.navigationOptions = () => ({
   header: <HeaderProfile />

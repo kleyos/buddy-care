@@ -38,7 +38,7 @@ const del = (url, token) =>
       "Content-Type": "application/json",
       "Access-Token": token
     },
-  }).then(res => res.json());
+  });
 
 export const getUsers = () => {
   const url = `${API_URL}/cards`;
@@ -65,12 +65,12 @@ export const edit = (text, type, id, token) => {
   return put(url, text, token);
 };
 
-export const apply = (id, type, token) => {
+export const apply = (type, id, token) => {
   const url = `${API_URL}/${type}/${id}/apply`;
   return post(url, token);
 };
 
-export const remove = (id, type) => {
+export const remove = (type, id, token) => {
   const url = `${API_URL}/${type}/${id}`;
-  return del(url);
+  return del(url, token);
 };

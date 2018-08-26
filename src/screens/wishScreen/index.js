@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   Platform,
-  Keyboard
+  Keyboard,
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 import { navTypes } from '../../config/configureNavigation';
@@ -73,7 +73,7 @@ export default class WishScreen extends Component {
           types: 'wishes',
           token: userToken
         });
-        navigateBack();
+        navigate(navTypes.MY_PROFILE, { addBtn: false });
       } else if (isFirstWish && flag === 'edit') {
         editCard({
           text,
@@ -124,6 +124,7 @@ export default class WishScreen extends Component {
               value={this.state.text}
               underlineColorAndroid="transparent"
               textAlignVertical="top"
+              KeyboardType="phone-pad"
             />
             <Text style={styles.charText}>{this.state.text.length}/500</Text>
           </View>

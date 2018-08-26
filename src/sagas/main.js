@@ -56,9 +56,10 @@ export function* saveWorker({ payload }) {
   }
 }
 export function* applyWorker({ payload }) {
-  const { text, types, token } = payload;
+  const { types, token, id } = payload;
   try {
-    yield call(apply, text, types, token);
+    yield call(apply, types, id, token);
+    yield call(fetchUsersWorker);
   } catch (er) {
     console.log(er);
   }
@@ -72,12 +73,22 @@ export function* editWorker({ payload }) {
     console.log(er);
   }
 }
+export function* cancelWorker({ payload }) {
+  const { types, id, token } = payload;
+  try {
+    yield call(remove, types, id, token);
+    yield call(fetchUsersWorker);
+  } catch (er) {
+    console.log(er);
+  }
+}
 export default function* mainWatcher() {
   yield [
     takeEvery(fetchAllUsers, fetchUsersWorker),
     takeEvery(fetchUserProfile, fetchUserProfileWorker),
     takeEvery(saveCard, saveWorker),
     takeEvery(applyCard, applyWorker),
-    takeEvery(editCard, editWorker)
+    takeEvery(editCard, editWorker),
+    takeEvery(cancelCard, cancelWorker)
   ];
 }
