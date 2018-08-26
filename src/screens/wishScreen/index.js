@@ -16,11 +16,15 @@ import { navTypes } from '../../config/configureNavigation';
 import styles from './styles';
 
 export default class WishScreen extends Component {
-  
-  state={
-    text: '',
-    isKeyboard: false,
-    warning: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isKeyboard: false,
+      warning: false,
+      text: this.props.navigation.state.params.text || '',
+      flag: this.props.navigation.state.params.flag || 'save',
+      id: this.props.navigation.state.params.id || null
+    };
   }
 
   componentDidMount() {
@@ -46,13 +50,39 @@ export default class WishScreen extends Component {
   }
 
   handleSaveButtonPress = () => {
-    if (this.state.text) {
-      this.props.navigate(navTypes.OFFER);
-      this.props.saveCard({
-        text: this.state.text,
-        types: 'wishes',
-        token: this.props.userToken
-      });
+    const { text, flag, id } = this.state;
+    const {
+      isFirstWish,
+      userToken,
+      saveCard,
+      editCard,
+      navigate,
+      navigateBack
+    } = this.props;
+    if (text) {
+      if (!isFirstWish && flag === 'save') {
+        saveCard({
+          text,
+          types: 'wishes',
+          token: userToken
+        });
+        navigate(navTypes.MAIN);
+      } else if (isFirstWish && flag === 'save') {
+        saveCard({
+          text,
+          types: 'wishes',
+          token: userToken
+        });
+        navigateBack();
+      } else if (isFirstWish && flag === 'edit') {
+        editCard({
+          text,
+          types: 'wishes',
+          id,
+          token: userToken
+        });
+        navigateBack();
+      }
     } else {
       this.setState({ warning: true });
     }
@@ -122,9 +152,12 @@ export default class WishScreen extends Component {
 }
 WishScreen.propTypes = {
   navigate: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
   navigateBack: PropTypes.func.isRequired,
   saveCard: PropTypes.func.isRequired,
-  userToken: PropTypes.string.isRequired
+  editCard: PropTypes.func.isRequired,
+  userToken: PropTypes.string.isRequired,
+  isFirstWish: PropTypes.bool
 };
 
 WishScreen.navigationOptions = {
