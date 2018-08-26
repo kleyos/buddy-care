@@ -48,6 +48,11 @@ export default class WishScreen extends Component {
   handleSaveButtonPress = () => {
     if (this.state.text) {
       this.props.navigate(navTypes.OFFER);
+      this.props.saveCard({
+        text: this.state.text,
+        types: 'wishes',
+        token: this.props.userToken
+      });
     } else {
       this.setState({ warning: true });
     }
@@ -117,7 +122,9 @@ export default class WishScreen extends Component {
 }
 WishScreen.propTypes = {
   navigate: PropTypes.func.isRequired,
-  navigateBack: PropTypes.func.isRequired
+  navigateBack: PropTypes.func.isRequired,
+  saveCard: PropTypes.func.isRequired,
+  userToken: PropTypes.string.isRequired
 };
 
 WishScreen.navigationOptions = {

@@ -7,11 +7,8 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import _ from 'lodash';
 
 import HeaderProfile from '../../containers/HeaderProfileContainer';
-import itemList from '../../dummyData/data';
-import { genarateListOfObject } from '../../config/utils';
 import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
 
@@ -19,31 +16,35 @@ export default class MyProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0,
       isAddBtns: false
     };
   }
   keyExtractor = (item, i) => i;
-
+  
+  handleEditPress = (type, text, id) => {
+    const upperCaseType = type.toLocaleUpperCase();
+    this.props.navigate(navTypes[upperCaseType], { text, flag: 'edit', id });
+  }
+  
   renderCard = (el, i) => (
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <Image
         style={styles.line}
-        source={el.type === 'wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
+        source={el.type === 'Wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
         resizeMode="stretch"
       />
       <View style={styles.itemContent}>
         <Text style={styles.itemText}> {el.text}</Text>
         <View style={styles.itemRowBtn}>
           <Image
-            style={el.type === 'wish' ? styles.itemWish : styles.itemOffer}
-            source={el.type === 'wish' ? require('../../assets/wish.png') : require('../../assets/offer.png')}
+            style={el.type === 'Wish' ? styles.itemWish : styles.itemOffer}
+            source={el.type === 'Wish' ? require('../../assets/wish.png') : require('../../assets/offer.png')}
             resizeMode="cover"
           />
           <View style={styles.itemRow}>
             <TouchableOpacity
               style={styles.itemBtn}
-              onPress={() => console.log('apply')}
+              onPress={() => this.handleEditPress("wish", "bla")}
             >
               <Image
                 style={styles.btn}
@@ -53,7 +54,7 @@ export default class MyProfile extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.itemBtn}
-              onPress={() => console.log('apply')}
+              onPress={() => this.handleEditPress(el.type, el.text, el.id)}
             >
               <Image
                 style={styles.btn}
@@ -65,23 +66,6 @@ export default class MyProfile extends Component {
         </View>
       </View>
     </View>
-  )
-
-  renderTab = (item, i) => (
-    <TouchableOpacity
-      style={{ flex: 1 }}
-      onPress={() => this.setState({ selectedIndex: i })}
-      key={i}
-    >
-      <View style={i === this.state.selectedIndex
-        ? [styles.btnStyle, styles.selectedBtnStyle]
-        : styles.btnStyle}
-      >
-        <Text style={i === this.state.selectedIndex ? [styles.btnText, { opacity: 1 }] : styles.btnText} >
-          {item}
-        </Text>
-      </View>
-    </TouchableOpacity>
   )
   renderAddBtns = () => {
     const { navigate } = this.props;
@@ -110,10 +94,8 @@ export default class MyProfile extends Component {
     ];
   };
   render() {
-    const { userName, userAvatar } = this.props;
+    const { userName, userAvatar, cards } = this.props;
     
-    const data = itemList.map(item => genarateListOfObject(item));
-
     return [
       <ImageBackground
         key="picture"
@@ -126,7 +108,7 @@ export default class MyProfile extends Component {
       <FlatList
         key="list"
         style={styles.container}
-        data={_.flattenDeep(data)}
+        data={cards}
         keyExtractor={this.keyExtractor}
         renderItem={({ item, i }) => this.renderCard(item, i)}
       />,

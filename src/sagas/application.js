@@ -9,10 +9,10 @@ export function* startupWorker() {
   try {
     const userLoggedIn = yield select(isUserLoggedIn);
     const firstWish = yield select(isFirstWish);
-    yield put(fetchAllUsers());
     
     if (userLoggedIn && firstWish) {
       yield put(navigateWithReset(navTypes.MAIN));
+      yield put(fetchAllUsers());
     } else if (userLoggedIn && !firstWish) {
       yield put(navigate(navTypes.WISH));
     } else {

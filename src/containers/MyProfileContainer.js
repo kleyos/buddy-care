@@ -7,17 +7,22 @@ import {
   isUserLoggedIn
 } from '../modules/auth/selectors';
 import { navigateBack, navigate } from '../modules/navigation/actions';
+import { getCardsById } from '../modules/main/selectors';
+import { editCard, cancelCard } from '../modules/main/actions'
 
 const mapStateToProps = state => ({
   loggedIn: isUserLoggedIn(state),
   userName: getUserName(state),
   userId: getUserId(state),
-  userAvatar: getUserAvatar(state)
+  userAvatar: getUserAvatar(state),
+  cards: getCardsById(state, getUserId(state))
 });
 
 const mapDispatchToProps = {
   navigateBack,
-  navigate
+  navigate,
+  editCard,
+  cancelCard
 };
 
 

@@ -7,9 +7,20 @@ import {
   fetchUserProfile,
   fetchUserProfileSuccess,
   fetchUserProfileFailure,
-  filterUsers
+  filterUsers,
+  saveCard,
+  editCard,
+  cancelCard,
+  applyCard
 } from '../modules/main/actions';
-import { getUsers, getUserProfile } from '../api';
+import {
+  getUsers,
+  getUserProfile,
+  apply,
+  create,
+  edit,
+  remove
+} from '../api';
 
 export function* fetchUsersWorker() {
   try {
@@ -35,9 +46,38 @@ export function* fetchUserProfileWorker({ payload }) {
     yield put(fetchUserProfileFailure(null));
   }
 }
+export function* saveWorker({ payload }) {
+  const { text, types, token } = payload;
+  try {
+    yield call(create, text, types, token);
+    yield call(fetchUsersWorker);
+  } catch (er) {
+    console.log(er);
+  }
+}
+export function* applyWorker({ payload }) {
+  const { text, types, token } = payload;
+  try {
+    yield call(apply, text, types, token);
+  } catch (er) {
+    console.log(er);
+  }
+}
+export function* editWorker({ payload }) {
+  const { text, types, id, token } = payload;
+  try {
+    yield call(edit, text, types, id, token);
+    yield call(fetchUsersWorker);
+  } catch (er) {
+    console.log(er);
+  }
+}
 export default function* mainWatcher() {
   yield [
     takeEvery(fetchAllUsers, fetchUsersWorker),
-    takeEvery(fetchUserProfile, fetchUserProfileWorker)
+    takeEvery(fetchUserProfile, fetchUserProfileWorker),
+    takeEvery(saveCard, saveWorker),
+    takeEvery(applyCard, applyWorker),
+    takeEvery(editCard, editWorker)
   ];
 }

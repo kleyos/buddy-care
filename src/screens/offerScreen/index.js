@@ -15,10 +15,15 @@ import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
 
 export default class OfferScreen extends Component {
-  state={
-    text: '',
-    isKeyboard: false,
-    warning: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isKeyboard: false,
+      warning: false,
+      text: this.props.navigation.state.params.text || '',
+      flag: this.props.navigation.state.params.flag || 'save',
+      id: this.props.navigation.state.params.id || null
+    };
   }
 
   componentDidMount() {
@@ -44,9 +49,41 @@ export default class OfferScreen extends Component {
   }
 
   handleSaveButtonPress = () => {
-    if (this.state.text) {
-      this.props.setFirstWish();
-      this.props.navigate(navTypes.MAIN);
+    const { text, flag, id } = this.state;
+    const {
+      isFirstWish,
+      userToken,
+      setFirstWish,
+      saveCard,
+      editCard,
+      navigate,
+      navigateBack
+    } = this.props;
+    if (text) {
+      if (!isFirstWish && flag === 'save') {
+        setFirstWish();
+        saveCard({
+          text,
+          types: 'offers',
+          token: userToken
+        });
+        navigate(navTypes.MAIN);
+      } else if (isFirstWish && flag === 'save') {
+        saveCard({
+          text,
+          types: 'offers',
+          token: userToken
+        });
+        navigateBack();
+      } else if (isFirstWish && flag === 'edit') {
+        editCard({
+          text,
+          types: 'offers',
+          id,
+          token: userToken
+        });
+        navigateBack();
+      }
     } else {
       this.setState({ warning: true });
     }
@@ -116,8 +153,13 @@ export default class OfferScreen extends Component {
 }
 OfferScreen.propTypes = {
   navigate: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
   navigateBack: PropTypes.func.isRequired,
-  setFirstWish: PropTypes.func.isRequired
+  saveCard: PropTypes.func.isRequired,
+  editCard: PropTypes.func.isRequired,
+  setFirstWish: PropTypes.func.isRequired,
+  userToken: PropTypes.string.isRequired,
+  isFirstWish: PropTypes.bool
 };
 
 OfferScreen.navigationOptions = {

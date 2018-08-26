@@ -21,9 +21,10 @@ export function* loginWorker({ payload }) {
       yield put(loginFailure(payload.isCancelled));
     } else if (payload.token) {
       const result = yield call(createUser, payload.token);
-      
-      yield put(loginSuccess(result));
-      yield put(navigate(navTypes.WISH));
+      if (result.user) {
+        yield put(loginSuccess(result.user));
+        yield put(navigate(navTypes.WISH));
+      }
     }
   } catch (er) {
     console.log(er);

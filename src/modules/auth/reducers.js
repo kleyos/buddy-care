@@ -26,7 +26,7 @@ export default handleActions(
       ...state,
       loading: false,
       loggedIn: true,
-      user: { ...payload }
+      user: payload
     }),
     [loginFailure]: state => ({
       ...state,
