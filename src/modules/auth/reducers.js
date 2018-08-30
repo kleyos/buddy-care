@@ -6,8 +6,7 @@ import {
   logout,
   logoutSuccess,
   logoutFailure,
-  setFirstWish,
-  getDeviceToken
+  setFirstWish
 } from './actions';
 
 const defaultState = {
@@ -52,10 +51,6 @@ export default handleActions(
     [setFirstWish]: state => ({
       ...state,
       firstWish: true
-    }),
-    [getDeviceToken]:  (state, { payload }) => ({
-      ...state,
-      deviceToken: payload
     })
   },
   defaultState

@@ -17,10 +17,8 @@ import styles from './styles';
 
 export default class MainScreen extends Component {
   componentDidMount() {
-    
-    this.notificationListener = () => this.props.getNotifications();
+    this.notificationListener = this.props.getNotifications();
   }
-
   componentWillUnmount() {
     this.notificationListener();
   }

@@ -11,5 +11,4 @@ export const logoutSuccess = createAction(types.LOGOUT.SUCCESS);
 export const logoutFailure = createAction(types.LOGOUT.FAILURE);
 
 export const setFirstWish = createAction('SET_FIRST_WISH');
-export const getDeviceToken = createAction('GET_DEVICE_TOKEN');
 export const gettingDeviceToken = createAction('GETTING_DEVICE_TOKEN');

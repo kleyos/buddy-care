@@ -1,5 +1,5 @@
-import { put, call, takeEvery } from 'redux-saga/effects';
-
+import { put, call, select, takeEvery } from 'redux-saga/effects';
+import { getUserToken } from '../modules/auth/selectors';
 import {
   fetchAllUsers,
   fetchAllUsersFailure,
@@ -21,13 +21,16 @@ import {
   edit,
   remove
 } from '../api';
+import { gettingDeviceToken } from '../modules/auth/actions';
 
 export function* fetchUsersWorker() {
   try {
+    const userToken = yield select(getUserToken);
     const response = yield call(getUsers);
     if (response) {
       yield put(fetchAllUsersSuccess(response.cards));
       yield put(filterUsers(response.cards));
+      yield put(gettingDeviceToken(userToken));
     }
   } catch (er) {
     console.log(er);

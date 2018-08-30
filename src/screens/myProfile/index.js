@@ -142,7 +142,7 @@ export default class MyProfile extends Component {
 }
 MyProfile.propTypes = {
   navigate: PropTypes.func.isRequired,
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
   cancelCard: PropTypes.func.isRequired,
   userToken: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
