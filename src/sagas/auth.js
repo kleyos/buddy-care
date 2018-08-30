@@ -6,7 +6,8 @@ import {
   loginFailure,
   logout,
   logoutFailure,
-  logoutSuccess
+  logoutSuccess,
+  gettingDeviceToken
 } from '../modules/auth/actions';
 import { cleanStore } from '../modules/application/actions';
 import { navigate } from '../modules/navigation/actions';
@@ -23,6 +24,7 @@ export function* loginWorker({ payload }) {
       const result = yield call(createUser, payload.token);
       if (result.user) {
         yield put(loginSuccess(result.user));
+        yield put(gettingDeviceToken());
         yield put(navigate(navTypes.WISH));
       }
     }

@@ -6,13 +6,15 @@ import {
   logout,
   logoutSuccess,
   logoutFailure,
-  setFirstWish
+  setFirstWish,
+  getDeviceToken
 } from './actions';
 
 const defaultState = {
   loading: false,
   loggedIn: false,
   user: null,
+  deviceToken: null,
   firstWish: false
 };
 
@@ -50,6 +52,10 @@ export default handleActions(
     [setFirstWish]: state => ({
       ...state,
       firstWish: true
+    }),
+    [getDeviceToken]:  (state, { payload }) => ({
+      ...state,
+      deviceToken: payload
     })
   },
   defaultState

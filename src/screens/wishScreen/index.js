@@ -66,7 +66,7 @@ export default class WishScreen extends Component {
           types: 'wishes',
           token: userToken
         });
-        navigate(navTypes.MAIN);
+        navigate(navTypes.OFFER);
       } else if (isFirstWish && flag === 'save') {
         saveCard({
           text,

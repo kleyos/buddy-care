@@ -6,6 +6,7 @@ import configureStore from './src/config/configureStore';
 import rootReducer from './src/modules';
 import rootSaga from './src/sagas';
 
+
 const store = configureStore(rootReducer, rootSaga);
 
 const BuddyCare = () => (
@@ -16,5 +17,4 @@ const BuddyCare = () => (
 
 
 AppRegistry.registerComponent('BuddyCare', () => BuddyCare);
-
 export default BuddyCare;

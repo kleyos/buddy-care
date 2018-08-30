@@ -9,12 +9,22 @@ import {
 } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import MaterialInitials from 'react-native-material-initials/native';
+
 import { navTypes } from '../../config/configureNavigation';
 import MainHeader from '../../containers/MainHeaderContainer';
 import { randomColor } from '../../config/utils';
 import styles from './styles';
 
 export default class MainScreen extends Component {
+  componentDidMount() {
+    
+    this.notificationListener = () => this.props.getNotifications();
+  }
+
+  componentWillUnmount() {
+    this.notificationListener();
+  }
+  
   keyExtractor = (item, i) => i;
 
   renderCard = (el, i) => {

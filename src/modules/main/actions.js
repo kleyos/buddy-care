@@ -17,3 +17,5 @@ export const editCard = createAction('EDIT_CARD');
 export const applyCard = createAction('APPLY_CARD');
 
 export const cancelCard = createAction('CANCEL_CARD');
+
+export const getNotifications = createAction('GET_NOTIFICATIONS');
