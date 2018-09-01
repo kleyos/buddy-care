@@ -8,7 +8,8 @@ import {
   fetchUserProfile,
   fetchUserProfileSuccess,
   fetchUserProfileFailure,
-  filterCards,
+  filterWishes,
+  filterOffers,
   saveCard,
   editCard,
   cancelCard,
@@ -31,7 +32,8 @@ export function* fetchCardsWorker() {
     if (response) {
       const unApplyedCards = response.cards.filter(item => !item.apllicant);
       yield put(fetchAllCardsSuccess(unApplyedCards));
-      yield put(filterCards(unApplyedCards));
+      yield put(filterWishes(unApplyedCards.filter(item => item.type === 'Wish')));
+      yield put(filterOffers(unApplyedCards.filter(item => item.type === 'Offer')));
       yield put(gettingDeviceToken(userToken));
     }
   } catch (er) {

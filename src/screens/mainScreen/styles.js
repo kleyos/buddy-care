@@ -65,6 +65,34 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'black',
     marginLeft: 10
-  }
+  },
+  tabContainer: {
+    height: 40,
+    backgroundColor: '#7758C4',
+    paddingTop: 10
+  },
+  btnContainer: {
+    flex: 1,
+    backgroundColor: '#7758C4',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  btnStyle: {
+    height: 30,
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#7758C4',
+  },
+  selectedBtnStyle: {
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3
+  },
+  btnText: {
+    color: '#fff',
+    fontSize: 17,
+    opacity: 0.7,
+    textAlign: 'center',
+  },
 
 });

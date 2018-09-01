@@ -6,14 +6,16 @@ import {
   fetchUserProfile,
   fetchUserProfileSuccess,
   fetchUserProfileFailure,
-  filterCards
+  filterOffers,
+  filterWishes
 } from './actions';
 
 const defaultState = {
   loading: false,
   cards: [],
   profileUser: null,
-  filteredCards: null
+  wishCards: null,
+  offerCard: null
 };
 
 export default handleActions(
@@ -46,9 +48,13 @@ export default handleActions(
       loading: false,
       profileUser: payload
     }),
-    [filterCards]: (state, { payload }) => ({
+    [filterWishes]: (state, { payload }) => ({
       ...state,
-      filteredCards: payload
+      wishCards: payload
+    }),
+    [filterOffers]: (state, { payload }) => ({
+      ...state,
+      offerCards: payload
     })
   },
   defaultState

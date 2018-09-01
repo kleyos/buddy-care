@@ -8,7 +8,8 @@ export const fetchUserProfile = createAction('FETCH_USER_PROFILE');
 export const fetchUserProfileSuccess = createAction('FETCH_USER_PROFILE_SUCCESS');
 export const fetchUserProfileFailure = createAction('FETCH_USER_PROFILE_FAILURE');
 
-export const filterCards = createAction('FILTER_CARDS');
+export const filterWishes = createAction('FILTER_WISHES');
+export const filterOffers = createAction('FILTER_OFFERS');
 
 export const saveCard = createAction('SAVE_CARD');
 

@@ -16,8 +16,28 @@ import { randomColor, defineSource } from '../../config/utils';
 import styles from './styles';
 
 export default class MainScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedIndex: 0,
+      listOfCards: props.cards
+    };
+  }
+
   componentDidMount() {
     this.notificationListener = this.props.getNotifications();
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    switch (this.state.selectedIndex) {
+      case 0: this.setState({ listOfCards: nextProps.cards });
+        break;
+      case 1: this.setState({ listOfCards: nextProps.wishes });
+        break;
+      case 2: this.setState({ listOfCards: nextProps.offers });
+        break;
+      default: break;
+    }
   }
   
   componentWillUnmount() {
@@ -37,6 +57,40 @@ export default class MainScreen extends Component {
   }
   
   keyExtractor = (item, i) => i;
+  
+  updateIndex = selectedIndex => {
+    const {
+      cards,
+      wishes,
+      offers
+    } = this.props;
+    this.setState({ selectedIndex });
+    switch (selectedIndex) {
+      case 0: this.setState({ listOfCards: cards });
+        break;
+      case 1: this.setState({ listOfCards: wishes });
+        break;
+      case 2: this.setState({ listOfCards: offers });
+        break;
+      default: break;
+    }
+  }
+  renderTab = (item, i) => (
+    <TouchableOpacity
+      style={{ flex: 1 }}
+      onPress={() => this.updateIndex(i)}
+      key={i}
+    >
+      <View style={i === this.state.selectedIndex
+        ? [styles.btnStyle, styles.selectedBtnStyle]
+        : styles.btnStyle}
+      >
+        <Text style={i === this.state.selectedIndex ? [styles.btnText, { opacity: 1 }] : styles.btnText} >
+          {item}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  )
   
   initialsAvatar = (firstName, lastName, onHandlePress) => (
     <TouchableOpacity
@@ -107,13 +161,20 @@ export default class MainScreen extends Component {
   }
 
   render() {
-    const { cards, loading } = this.props;
+    const { loading } = this.props;
+    const buttons = ['All', 'Wishes', 'Offers'];
+    const { listOfCards } = this.state;
     return (
       <View style={{ flex: 1 }}>
+        <View style={styles.tabContainer}>
+          <View style={styles.btnContainer}>
+            {buttons.map((item, i) => this.renderTab(item, i))}
+          </View>
+        </View>
         <FlatList
           key="cardList"
           style={styles.container}
-          data={cards}
+          data={listOfCards}
           keyExtractor={this.keyExtractor}
           renderItem={({ item, i }) => this.renderCard(item, i)}
         />
