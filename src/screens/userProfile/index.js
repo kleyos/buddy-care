@@ -12,7 +12,15 @@ import HeaderProfile from '../../containers/HeaderProfileContainer';
 import styles from './styles';
 
 export default class userProfile extends Component {
+  
+  handleApplyPress = (id, type, userToken) => {
+    const { applyCard } = this.props;
+    const types = type === 'Wish' ? 'wishes' : 'offers';
+    applyCard({ types, token: userToken, id });
+  }
+  
   keyExtractor = (item, i) => i;
+  
   renderCard = (el, i) => (
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <Image
@@ -40,7 +48,7 @@ export default class userProfile extends Component {
           />
           <TouchableOpacity
             style={styles.itemBtn}
-            onPress={() => console.log('apply')}
+            onPress={() => this.handleApplyPress(el.id, el.type, el.owner.token)}
           >
             <Image
               style={styles.btn}
@@ -55,7 +63,7 @@ export default class userProfile extends Component {
 
   render() {
     const {
-      users,
+      cards,
       navigation: { state: { params: { ownerId } } },
       profileUser
     } = this.props;
@@ -77,7 +85,7 @@ export default class userProfile extends Component {
         }
         <FlatList
           style={styles.container}
-          data={users.filter(item => item.owner.id === ownerId)}
+          data={cards.filter(item => item.owner.id === ownerId)}
           keyExtractor={this.keyExtractor}
           renderItem={({ item, i }) => this.renderCard(item, i)}
         />

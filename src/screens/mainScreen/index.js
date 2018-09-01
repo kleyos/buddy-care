@@ -19,15 +19,41 @@ export default class MainScreen extends Component {
   componentDidMount() {
     this.notificationListener = this.props.getNotifications();
   }
+  
   componentWillUnmount() {
     this.notificationListener();
   }
   
+  handleApplyPress = (id, type, userToken) => {
+    const { applyCard } = this.props;
+    const types = type === 'Wish' ? 'wishes' : 'offers';
+    applyCard({ types, token: userToken, id });
+  }
+  
+  handleAvatarPress = id => {
+    const { navigate, fetchUserProfile } = this.props;
+    navigate(navTypes.USER_PROFILE, { ownerId: id });
+    fetchUserProfile(id);
+  }
+  
   keyExtractor = (item, i) => i;
+  
+  initialsAvatar = (firstName, lastName, onHandlePress) => (
+    <TouchableOpacity
+      style={styles.itemBtn}
+      onPress={onHandlePress}
+    >
+      <MaterialInitials
+        style={{ alignSelf: 'center' }}
+        backgroundColor={`#${randomColor()}`}
+        color="white"
+        size={50}
+        text={`${firstName} ${lastName}`}
+        single={false}
+      />
+    </TouchableOpacity>)
 
   renderCard = (el, i) => {
-    const { navigate, fetchUserProfile } = this.props;
-
     return (
       <View style={[styles.item, styles.itemShadow]} key={i}>
         <Image
@@ -41,26 +67,18 @@ export default class MainScreen extends Component {
         <View style={styles.itemContent}>
           <View style={styles.itemRow}>
             {el.owner.profile.avatar_url
-            ? <Avatar
-              medium
-              rounded
-              source={{ uri: el.owner.profile.avatar_url }}
-              onPress={
-                  () => {
-                  navigate(navTypes.USER_PROFILE, { ownerId: el.owner.id });
-                  fetchUserProfile(el.owner.id);
-                  }
-                }
-              activeOpacity={0.7}
-            />
-            : <MaterialInitials
-              style={{ alignSelf: 'center' }}
-              backgroundColor={`#${randomColor()}`}
-              color="white"
-              size={50}
-              text={`${el.owner.profile.first_name} ${el.owner.profile.last_name}`}
-              single={false}
-            />
+              ? <Avatar
+                medium
+                rounded
+                source={{ uri: el.owner.profile.avatar_url }}
+                onPress={() => this.handleAvatarPress(el.owner.id)}
+                activeOpacity={0.7}
+              />
+              : this.initialsAvatar(
+                  el.owner.profile.first_name,
+                  el.owner.profile.first_name,
+                  () => this.handleAvatarPress(el.owner.id)
+              )
             }
             <Text style={styles.itemName}>
               {el.owner.profile.first_name}
@@ -77,7 +95,7 @@ export default class MainScreen extends Component {
             />
             <TouchableOpacity
               style={styles.itemBtn}
-              onPress={() => console.log('apply')}
+              onPress={() => this.handleApplyPress(el.id, el.type, el.owner.token)}
             >
               <Image
                 style={styles.btn}
@@ -95,13 +113,13 @@ export default class MainScreen extends Component {
   }
 
   render() {
-    const { users, loading } = this.props;
+    const { cards, loading } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <FlatList
           key="cardList"
           style={styles.container}
-          data={users}
+          data={cards}
           keyExtractor={this.keyExtractor}
           renderItem={({ item, i }) => this.renderCard(item, i)}
         />
