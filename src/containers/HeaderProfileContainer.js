@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
 import HeaderProfile from '../components/headerProfile';
-import { navigateBack } from '../modules/navigation/actions';
+import { navigate } from '../modules/navigation/actions';
+import { navTypes } from '../config/configureNavigation';
 
-const mapStateToProps = state => ({
-  //
-});
 
 const mapDispatchToProps = {
-  navigateBack
+  navigateBack: () => navigate(navTypes.MAIN)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderProfile);
+export default connect(null, mapDispatchToProps)(HeaderProfile);

@@ -18,7 +18,7 @@ export default StyleSheet.create({
   },
   line: {
     width: width - 20,
-    height: 4,
+    height: 4
   },
   itemShadow: {
     shadowColor: '#EBEAEA',
@@ -41,11 +41,11 @@ export default StyleSheet.create({
   itemWish: {
     width: 80,
     height: 40,
-    marginLeft: -20,
+    marginLeft: -20
   },
-  itemType: {
+  itemOffer: {
     width: 60,
-    height: 20,
+    height: 20
   },
   btn: {
     width: 100,
@@ -63,7 +63,7 @@ export default StyleSheet.create({
   },
   profilePicture: {
     width,
-    height: 220,
+    height: 220
   },
   profileName: {
     backgroundColor: 'transparent',
@@ -75,7 +75,7 @@ export default StyleSheet.create({
   },
   tabContainer: {
     height: 40,
-    backgroundColor: '#7758C4',
+    backgroundColor: '#7758C4'
   },
   btnContainer: {
     flex: 1,
@@ -89,41 +89,41 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#7758C4',
+    backgroundColor: '#7758C4'
   },
   selectedBtnStyle: {
     borderBottomColor: '#fff',
-    borderBottomWidth: 3,
+    borderBottomWidth: 3
   },
   btnText: {
     color: '#fff',
     fontSize: 17,
     opacity: 0.7,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   divider: {
     height: 1,
     width,
     backgroundColor: '#7758C4',
-    opacity: 0.3,
+    opacity: 0.3
   },
   addBtn: {
     position: 'absolute',
     bottom: 0,
-    right: 0,
+    right: 0
   },
   roundBtn: {
     width: 100,
-    height: 100,
+    height: 100
   },
   addBntContainer: {
     position: 'absolute',
     right: 5,
-    bottom: 75,
+    bottom: 75
   },
   roundAddBtn: {
     width: 90,
-    height: 90,
-  },
+    height: 90
+  }
 
 });

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import UserProfile from '../screens/userProfile';
-import { getAllCards, getUserProfile } from '../modules/main/selectors';
+import { getCards, getUserProfile } from '../modules/main/selectors';
 import { applyCard } from '../modules/main/actions';
 
 const mapStateToProps = state => ({
-  cards: getAllCards(state),
+  cards: getCards(state),
   profileUser: getUserProfile(state)
 });
 
