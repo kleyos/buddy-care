@@ -1,8 +1,9 @@
 import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
 
-export const randomColor = () => '0123456789abcdef'.split('').map((v,i,a) => {
-  return i>5 ? null : a[Math.floor(Math.random()*16)] }).join('');
+export const randomColor = () => '0123456789abcdef'.split('').map((v, i, a) => {
+  return i > 5 ? null : a[Math.floor(Math.random() * 16)]; 
+}).join('');
 
 
 export const openNotification = notification => {
@@ -23,6 +24,22 @@ export const openNotification = notification => {
   }
 
   firebase.notifications().displayNotification(notificationNew);
+};
+
+export const defineSource = type => {
+  const obj = {
+    Wish: {
+      line: require('../../assets/topLineAp.png'),
+      img: require('../../assets/wish.png'),
+      btn: require('../../assets/helpBtn.png')
+    },
+    Offer: {
+      line: require('../../assets/topLineH.png'),
+      img: require('../../assets/offer.png'),
+      btn: require('../../assets/applyBtn.png')
+    }
+  };
+  return obj[type];
 };
 
 export default async message => {

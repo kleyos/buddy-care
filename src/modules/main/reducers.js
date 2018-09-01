@@ -1,36 +1,36 @@
 import { handleActions } from 'redux-actions';
 import {
-  fetchAllUsers,
-  fetchAllUsersSuccess,
-  fetchAllUsersFailure,
+  fetchAllCards,
+  fetchAllCardsSuccess,
+  fetchAllCardsFailure,
   fetchUserProfile,
   fetchUserProfileSuccess,
   fetchUserProfileFailure,
-  filterUsers
+  filterCards
 } from './actions';
 
 const defaultState = {
   loading: false,
-  users: [],
+  cards: [],
   profileUser: null,
-  filteredUsers: null
+  filteredCards: null
 };
 
 export default handleActions(
   {
-    [fetchAllUsers]: state => ({
+    [fetchAllCards]: state => ({
       ...state,
       loading: true
     }),
-    [fetchAllUsersSuccess]: (state, { payload }) => ({
+    [fetchAllCardsSuccess]: (state, { payload }) => ({
       ...state,
       loading: false,
-      users: payload
+      cards: payload
     }),
-    [fetchAllUsersFailure]: (state, { payload }) => ({
+    [fetchAllCardsFailure]: (state, { payload }) => ({
       ...state,
       loading: false,
-      users: payload
+      cards: payload
     }),
     [fetchUserProfile]: state => ({
       ...state,
@@ -46,9 +46,9 @@ export default handleActions(
       loading: false,
       profileUser: payload
     }),
-    [filterUsers]: (state, { payload }) => ({
+    [filterCards]: (state, { payload }) => ({
       ...state,
-      filteredUsers: payload
+      filteredCards: payload
     })
   },
   defaultState

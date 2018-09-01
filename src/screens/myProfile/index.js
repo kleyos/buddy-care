@@ -12,6 +12,7 @@ import {
 import HeaderProfile from '../../containers/HeaderProfileContainer';
 import styles from './styles';
 import { navTypes } from '../../config/configureNavigation';
+import { defineSource } from '../../config/utils';
 
 export default class MyProfile extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class MyProfile extends Component {
     <View style={[styles.item, styles.itemShadow]} key={i}>
       <Image
         style={styles.line}
-        source={el.type === 'Wish' ? require('../../assets/topLineAp.png') : require('../../assets/topLineH.png')}
+        source={defineSource(el.type).line}
         resizeMode="stretch"
       />
       <View style={styles.itemContent}>
@@ -47,7 +48,7 @@ export default class MyProfile extends Component {
         <View style={styles.itemRowBtn}>
           <Image
             style={el.type === 'Wish' ? styles.itemWish : styles.itemOffer}
-            source={el.type === 'Wish' ? require('../../assets/wish.png') : require('../../assets/offer.png')}
+            source={defineSource(el.type).img}
             resizeMode="cover"
           />
           <View style={styles.itemRow}>

@@ -3,7 +3,7 @@ import { initStart, initFinish } from '../modules/application/actions';
 import { isUserLoggedIn, isFirstWish } from '../modules/auth/selectors';
 import { navTypes } from '../config/configureNavigation';
 import { navigate, navigateWithReset } from '../modules/navigation/actions';
-import { fetchAllUsers } from '../modules/main/actions';
+import { fetchAllCards } from '../modules/main/actions';
 
 export function* startupWorker() {
   try {
@@ -12,7 +12,7 @@ export function* startupWorker() {
     
     if (userLoggedIn && firstWish) {
       yield put(navigateWithReset(navTypes.MAIN));
-      yield put(fetchAllUsers());
+      yield put(fetchAllCards());
     } else if (userLoggedIn && !firstWish) {
       yield put(navigate(navTypes.WISH));
     } else {

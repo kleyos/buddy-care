@@ -1,21 +1,20 @@
 import { connect } from 'react-redux';
 import MainScreen from '../screens/mainScreen';
-import { getFilteredUsers, isLoading } from '../modules/main/selectors';
+import { getFilteredCards, isLoading } from '../modules/main/selectors';
 import { navigateBack, navigate } from '../modules/navigation/actions';
-import { fetchUserProfile, getNotifications } from '../modules/main/actions';
-import { getUserToken } from '../modules/auth/selectors';
+import { fetchUserProfile, getNotifications, applyCard } from '../modules/main/actions';
 
 const mapStateToProps = state => ({
-  users: getFilteredUsers(state),
+  cards: getFilteredCards(state),
   loading: isLoading(state),
-  userToken: getUserToken(state)
 });
 
 const mapDispatchToProps = {
   navigate,
   navigateBack,
   fetchUserProfile,
-  getNotifications
+  getNotifications,
+  applyCard
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

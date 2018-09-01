@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   TextInput,
   Platform,
-  Keyboard,
+  Keyboard
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 import { navTypes } from '../../config/configureNavigation';
@@ -52,12 +52,8 @@ export default class WishScreen extends Component {
   handleSaveButtonPress = () => {
     const { text, flag, id } = this.state;
     const {
-      isFirstWish,
-      userToken,
-      saveCard,
-      editCard,
-      navigate,
-      navigateBack
+      isFirstWish, userToken, saveCard,
+      editCard, navigate, navigateBack
     } = this.props;
     if (text) {
       if (!isFirstWish && flag === 'save') {
@@ -86,6 +82,7 @@ export default class WishScreen extends Component {
     } else {
       this.setState({ warning: true });
     }
+    Keyboard.dismiss();
   }
   render() {
     const { navigateBack } = this.props;

@@ -5,19 +5,19 @@ import {
   isUserLoggedIn
 } from '../modules/auth/selectors';
 import { navigateBack, navigate } from '../modules/navigation/actions';
-import { filterUsers } from '../modules/main/actions';
-import { getAllUsers } from '../modules/main/selectors';
+import { filterCards } from '../modules/main/actions';
+import { getAllCards } from '../modules/main/selectors';
 
 const mapStateToProps = state => ({
   loggedIn: isUserLoggedIn(state),
   userAvatar: getUserAvatar(state),
-  users: getAllUsers(state)
+  cards: getAllCards(state)
 });
 
 const mapDispatchToProps = {
   navigateBack,
   navigate,
-  filterUsers
+  filterCards
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

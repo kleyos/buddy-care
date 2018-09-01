@@ -22,25 +22,25 @@ export default class MainHeader extends Component {
     };
   }
     updateIndex = selectedIndex => {
-      const { users, filterUsers } = this.props;
+      const { cards, filterCards } = this.props;
       this.setState({ selectedIndex });
       switch (selectedIndex) {
         case 0:
           this.setState(
-            { listOfUsers: users },
-            () => filterUsers(this.state.listOfUsers)
+            { listOfUsers: cards },
+            () => filterCards(this.state.listOfUsers)
           );
           break;
         case 1:
           this.setState(
-            { listOfUsers: users.filter(item => item.type === 'Wish') },
-            () => filterUsers(this.state.listOfUsers)
+            { listOfUsers: cards.filter(item => item.type === 'Wish') },
+            () => filterCards(this.state.listOfUsers)
           );
           break;
         case 2:
           this.setState(
-            { listOfUsers: users.filter(item => item.type === 'Offer') },
-            () => filterUsers(this.state.listOfUsers)
+            { listOfUsers: cards.filter(item => item.type === 'Offer') },
+            () => filterCards(this.state.listOfUsers)
           );
           break;
         default: break;

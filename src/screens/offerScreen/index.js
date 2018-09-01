@@ -87,6 +87,7 @@ export default class OfferScreen extends Component {
     } else {
       this.setState({ warning: true });
     }
+    Keyboard.dismiss();
   }
   
   render() {

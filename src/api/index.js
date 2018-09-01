@@ -2,53 +2,63 @@ const API_URL = 'https://buddy-care.herokuapp.com/api/v1';
 
 const get = url => fetch(url).then(res => res.json());
 
-const createRequest = (url, data) =>
-  fetch(url, {
+export const createUser = token =>
+  fetch(`${API_URL}/sessions`, {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ access_token: token })
   }).then(res => res.json());
 
-const post = (url, data, token) =>
-  fetch(url, {
+export const assignDevice = (token, deviceToken) =>
+  fetch(url = `${API_URL}/assign_device`, {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "Access-Token": token
+      'Content-Type': 'application/json',
+      'Access-Token': token
     },
-    body: JSON.stringify({ text: data })
-  }).then(res => res.json());
-
-const createDeviceToken = (url, data, token) =>
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Token": token
-    },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ firebase_token: deviceToken })
   });
 
-const put = (url, data, token) =>
-  fetch(url, {
+export const create = (text, type, token) =>
+  fetch(`${API_URL}/${type}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Token': token
+    },
+    body: JSON.stringify({ text })
+  }).then(res => res.json());
+
+export const apply = (type, id, token) =>
+  fetch(`${API_URL}/${type}/${id}/apply`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Token': token
+    }
+  }).then(res => res.json());
+
+export const edit = (text, type, id, token) =>
+  fetch(`${API_URL}/${type}/${id}`, {
     method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
-      "Access-Token": token
+      'Content-Type': 'application/json',
+      'Access-Token': token
     },
-    body: JSON.stringify({ text: data })
+    body: JSON.stringify({ text })
   }).then(res => res.json());
 
-const del = (url, token) =>
-  fetch(url, {
+export const remove = (type, id, token) => {
+  fetch(`${API_URL}/${type}/${id}`, {
     method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
-      "Access-Token": token
-    },
+      'Content-Type': 'application/json',
+      'Access-Token': token
+    }
   });
+};
 
 export const getUsers = () => {
   const url = `${API_URL}/cards`;
@@ -58,32 +68,4 @@ export const getUsers = () => {
 export const getUserProfile = userId => {
   const url = `${API_URL}/users/${userId}`;
   return get(url);
-};
-export const assignDevice = (token, deviceToken) => {
-  const url = `${API_URL}/assign_device`;
-  return createDeviceToken(url, { firebase_token: deviceToken }, token);
-};
-export const createUser = token => {
-  const url = `${API_URL}/sessions`;
-  return createRequest(url, { access_token: token });
-};
-
-export const create = (text, type, token) => {
-  const url = `${API_URL}/${type}`;
-  return post(url, text, token);
-};
-
-export const edit = (text, type, id, token) => {
-  const url = `${API_URL}/${type}/${id}`;
-  return put(url, text, token);
-};
-
-export const apply = (type, id, token) => {
-  const url = `${API_URL}/${type}/${id}/apply`;
-  return post(url, token);
-};
-
-export const remove = (type, id, token) => {
-  const url = `${API_URL}/${type}/${id}`;
-  return del(url, token);
 };

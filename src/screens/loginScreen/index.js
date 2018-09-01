@@ -18,7 +18,7 @@ import { FbButton } from '../../components/fbButton';
 
 export default class LoginScreen extends Component {
   render() {
-    const { navigate, fetchAllUsers } = this.props;
+    const { navigate } = this.props;
     return (
       <ImageBackground
         style={styles.bgContainer}
@@ -60,7 +60,6 @@ export default class LoginScreen extends Component {
 LoginScreen.propTypes = {
   navigate: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  fetchAllUsers: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired
 };
 

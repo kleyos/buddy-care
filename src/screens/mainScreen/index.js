@@ -12,7 +12,7 @@ import MaterialInitials from 'react-native-material-initials/native';
 
 import { navTypes } from '../../config/configureNavigation';
 import MainHeader from '../../containers/MainHeaderContainer';
-import { randomColor } from '../../config/utils';
+import { randomColor, defineSource } from '../../config/utils';
 import styles from './styles';
 
 export default class MainScreen extends Component {
@@ -58,10 +58,7 @@ export default class MainScreen extends Component {
       <View style={[styles.item, styles.itemShadow]} key={i}>
         <Image
           style={styles.line}
-          source={el.type === 'Wish'
-          ? require('../../assets/topLineAp.png')
-          : require('../../assets/topLineH.png')
-        }
+          source={defineSource(el.type).line}
           resizeMode="stretch"
         />
         <View style={styles.itemContent}>
@@ -90,7 +87,7 @@ export default class MainScreen extends Component {
           <View style={styles.itemRowBtn}>
             <Image
               style={styles.itemType}
-              source={el.type === 'Wish' ? require('../../assets/wish.png') : require('../../assets/offer.png')}
+              source={defineSource(el.type).img}
               resizeMode="cover"
             />
             <TouchableOpacity
@@ -99,10 +96,7 @@ export default class MainScreen extends Component {
             >
               <Image
                 style={styles.btn}
-                source={el.type === 'Wish'
-                  ? require('../../assets/helpBtn.png')
-                  : require('../../assets/applyBtn.png')
-                }
+                source={defineSource(el.type).btn}
                 resizeMode="contain"
               />
             </TouchableOpacity>

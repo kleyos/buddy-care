@@ -43,7 +43,7 @@ export default StyleSheet.create({
     height: 40,
     marginLeft: -20,
   },
-  itemOffer: {
+  itemType: {
     width: 60,
     height: 20,
   },
