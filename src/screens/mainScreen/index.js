@@ -40,10 +40,6 @@ export default class MainScreen extends Component {
     }
   }
   
-  componentWillUnmount() {
-    this.notificationListener();
-  }
-  
   handleApplyPress = (id, type, userToken) => {
     const { applyCard } = this.props;
     const types = type === 'Wish' ? 'wishes' : 'offers';
@@ -108,6 +104,7 @@ export default class MainScreen extends Component {
     </TouchableOpacity>)
 
   renderCard = (el, i) => {
+    const { isLogin } = this.props;
     return (
       <View style={[styles.item, styles.itemShadow]} key={i}>
         <Image
@@ -147,6 +144,7 @@ export default class MainScreen extends Component {
             <TouchableOpacity
               style={styles.itemBtn}
               onPress={() => this.handleApplyPress(el.id, el.type, el.owner.token)}
+              disabled={!isLogin}
             >
               <Image
                 style={styles.btn}

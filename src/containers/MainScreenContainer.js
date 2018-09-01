@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import MainScreen from '../screens/mainScreen';
 import { navigateBack, navigate } from '../modules/navigation/actions';
+import { isUserLoggedIn } from '../modules/auth/selectors';
 import {
   getCards,
   isLoading,
@@ -16,6 +17,7 @@ import {
 const mapStateToProps = state => ({
   cards: getCards(state),
   loading: isLoading(state),
+  isLogin: isUserLoggedIn(state),
   offers: getOffers(state),
   wishes: getWishes(state)
 });
