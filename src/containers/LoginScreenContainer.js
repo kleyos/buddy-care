@@ -3,9 +3,10 @@ import LoginScreen from '../screens/loginScreen';
 import { login, logout } from '../modules/auth/actions';
 import { fetchAllCards } from '../modules/main/actions';
 import { navigate } from '../modules/navigation/actions';
+import { isUserLoggedIn } from '../modules/auth/selectors';
 
 const mapStateToProps = state => ({
-  loggedIn: state.auth.loggedIn
+  loggedIn: isUserLoggedIn(state),
 });
 const mapDispatchToProps = {
   login,

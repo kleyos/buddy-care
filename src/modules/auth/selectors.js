@@ -1,5 +1,5 @@
 export const isUserLoggedIn = state => state.auth.loggedIn;
-export const isUserLoading = state => state.auth.loading;
+export const isLoading = state => state.auth.loading;
 export const isFirstWish = state => state.auth.firstWish;
 
 export const getUserToken = state => {

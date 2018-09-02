@@ -104,7 +104,6 @@ export default class MainScreen extends Component {
     </TouchableOpacity>)
 
   renderCard = (el, i) => {
-    const { isLogin } = this.props;
     return (
       <View style={[styles.item, styles.itemShadow]} key={i}>
         <Image
@@ -144,7 +143,6 @@ export default class MainScreen extends Component {
             <TouchableOpacity
               style={styles.itemBtn}
               onPress={() => this.handleApplyPress(el.id, el.type, el.owner.token)}
-              disabled={!isLogin}
             >
               <Image
                 style={styles.btn}

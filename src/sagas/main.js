@@ -1,29 +1,19 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects';
-import { Alert } from  'react-native';
-import { getUserToken } from '../modules/auth/selectors';
+import { Alert } from 'react-native';
+import { getUserToken, isUserLoggedIn } from '../modules/auth/selectors';
+import { gettingDeviceToken } from '../modules/auth/actions';
 import {
-  fetchAllCards,
-  fetchAllCardsFailure,
-  fetchAllCardsSuccess,
-  fetchUserProfile,
-  fetchUserProfileSuccess,
-  fetchUserProfileFailure,
-  filterWishes,
-  filterOffers,
-  saveCard,
-  editCard,
-  cancelCard,
-  applyCard
+  fetchAllCards, fetchAllCardsFailure, fetchAllCardsSuccess,
+  fetchUserProfile, fetchUserProfileSuccess, fetchUserProfileFailure,
+  filterWishes, filterOffers,
+  saveCard, editCard, cancelCard, applyCard
 } from '../modules/main/actions';
 import {
-  getUsers,
-  getUserProfile,
-  apply,
-  create,
-  edit,
-  remove
+  getUsers, getUserProfile,
+  apply, create, edit, remove
 } from '../api';
-import { gettingDeviceToken } from '../modules/auth/actions';
+import { navigate } from '../modules/navigation/actions';
+import { navTypes } from '../config/configureNavigation';
 
 export function* fetchCardsWorker() {
   try {
@@ -64,10 +54,16 @@ export function* saveWorker({ payload }) {
 }
 export function* applyWorker({ payload }) {
   const { types, token, id } = payload;
+  const isLogged = yield select(isUserLoggedIn)
   try {
-    yield call(apply, types, id, token);
-    yield call(fetchCardsWorker);
-    Alert.alert('Thank you for applying');
+    if (isLogged) {
+      yield call(apply, types, id, token);
+      yield call(fetchCardsWorker);
+      Alert.alert('Thank you for applying');
+    } else {
+      Alert.alert("You can't apply action. Please sign in");
+      yield put(navigate(navTypes.LOGIN));
+    }
   } catch (er) {
     console.log(er);
   }
