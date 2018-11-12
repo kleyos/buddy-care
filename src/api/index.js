@@ -38,7 +38,7 @@ export const apply = (type, id, token) =>
       'Content-Type': 'application/json',
       'Access-Token': token
     }
-  }).then(res => res.json());
+  }).then(res => res.json())
 
 export const edit = (text, type, id, token) =>
   fetch(`${API_URL}/${type}/${id}`, {

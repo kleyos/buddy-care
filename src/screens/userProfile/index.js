@@ -14,13 +14,13 @@ import { defineSource } from '../../config/utils';
 export default class userProfile extends Component {
   keyExtractor = (item, i) => i;
   
-  handleApplyPress = (id, type, userToken) => {
-    const { applyCard } = this.props;
+  handleApplyPress = (id, type) => {
+    const { applyCard, userToken } = this.props;
     const types = type === 'Wish' ? 'wishes' : 'offers';
-    applyCard({ types, token: userToken, id });
+    applyCard({ types, id, token: userToken });
   }
-  renderCard = (el, i) => (
-    <View style={[styles.item, styles.itemShadow]} key={i}>
+  renderCard = (el, i) => {
+    return (<View style={[styles.item, styles.itemShadow]} key={i}>
       <Image
         style={styles.line}
         source={defineSource(el.type).line}
@@ -36,7 +36,7 @@ export default class userProfile extends Component {
           />
           <TouchableOpacity
             style={styles.itemBtn}
-            onPress={() => this.handleApplyPress(el.id, el.type, el.owner.token)}
+            onPress={() => this.handleApplyPress(el.id, el.type)}
           >
             <Image
               style={styles.btn}
@@ -46,8 +46,8 @@ export default class userProfile extends Component {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
-  )
+    </View>);
+  }
 
   render() {
     const {

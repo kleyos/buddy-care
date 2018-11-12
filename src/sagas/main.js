@@ -65,6 +65,7 @@ export function* applyWorker({ payload }) {
       yield put(navigate(navTypes.LOGIN));
     }
   } catch (er) {
+    Alert.alert("You can't apply action. Please try again");
     console.log(er);
   }
 }

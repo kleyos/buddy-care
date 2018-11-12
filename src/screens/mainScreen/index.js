@@ -40,10 +40,10 @@ export default class MainScreen extends Component {
     }
   }
   
-  handleApplyPress = (id, type, userToken) => {
-    const { applyCard } = this.props;
+  handleApplyPress = (id, type) => {
+    const { applyCard, userToken } = this.props;
     const types = type === 'Wish' ? 'wishes' : 'offers';
-    applyCard({ types, token: userToken, id });
+    applyCard({ types, id, token: userToken });
   }
   
   handleAvatarPress = id => {
@@ -142,7 +142,7 @@ export default class MainScreen extends Component {
             />
             <TouchableOpacity
               style={styles.itemBtn}
-              onPress={() => this.handleApplyPress(el.id, el.type, el.owner.token)}
+              onPress={() => this.handleApplyPress(el.id, el.type)}
             >
               <Image
                 style={styles.btn}
@@ -169,6 +169,7 @@ export default class MainScreen extends Component {
         </View>
         <FlatList
           key="cardList"
+          refreshing={loading}
           style={styles.container}
           data={listOfCards}
           keyExtractor={this.keyExtractor}
