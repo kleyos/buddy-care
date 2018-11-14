@@ -26,6 +26,7 @@ export default class MainScreen extends Component {
 
   componentDidMount() {
     this.notificationListener = this.props.getNotifications();
+    this.props.fetchAllCards();
   }
   
   componentWillReceiveProps(nextProps) {
@@ -157,7 +158,7 @@ export default class MainScreen extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, fetchAllCards } = this.props;
     const buttons = ['All', 'Wishes', 'Offers'];
     const { listOfCards } = this.state;
     return (
@@ -169,17 +170,18 @@ export default class MainScreen extends Component {
         </View>
         <FlatList
           key="cardList"
+          onRefresh={() => fetchAllCards()}
           refreshing={loading}
           style={styles.container}
           data={listOfCards}
           keyExtractor={this.keyExtractor}
           renderItem={({ item, i }) => this.renderCard(item, i)}
         />
-        {loading &&
+        {/* {loading &&
           <View style={styles.modal}>
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
-        }
+        } */}
       </View>
     );
   }

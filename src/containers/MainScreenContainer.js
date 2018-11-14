@@ -9,6 +9,7 @@ import {
   getWishes
 } from '../modules/main/selectors';
 import {
+  fetchAllCards,
   fetchUserProfile,
   getNotifications,
   applyCard
@@ -28,7 +29,8 @@ const mapDispatchToProps = {
   navigateBack,
   fetchUserProfile,
   getNotifications,
-  applyCard
+  applyCard,
+  fetchAllCards
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

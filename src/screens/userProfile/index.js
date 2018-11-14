@@ -53,7 +53,9 @@ export default class userProfile extends Component {
     const {
       cards,
       navigation: { state: { params: { ownerId } } },
-      profileUser
+      profileUser,
+      loading,
+      fetchAllCards
     } = this.props;
     const profile = profileUser && profileUser.profile;
 
@@ -72,6 +74,8 @@ export default class userProfile extends Component {
           </ImageBackground>
         }
         <FlatList
+          refreshing={loading}
+          onRefresh={() => fetchAllCards()}
           style={styles.container}
           data={cards.filter(item => item.owner.id === ownerId)}
           keyExtractor={this.keyExtractor}

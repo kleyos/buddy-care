@@ -104,7 +104,7 @@ export default class MyProfile extends Component {
     ];
   };
   render() {
-    const { userName, userAvatar, cards } = this.props;
+    const { userName, userAvatar, cards, loading, fetchAllCards } = this.props;
     
     return [
       <ImageBackground
@@ -117,6 +117,8 @@ export default class MyProfile extends Component {
       <View style={styles.divider} key="divider" />,
       <FlatList
         key="list"
+        onRefresh={() => fetchAllCards()}
+        refreshing={loading}
         style={styles.container}
         data={cards}
         keyExtractor={this.keyExtractor}
