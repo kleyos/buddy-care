@@ -16,7 +16,7 @@ export default class MainHeader extends Component {
     const { loggedIn, userAvatar, navigateBack, navigate } = this.props;
 
     return (
-      <View style={[styles.headerContainer, styles.shadow]}>
+      <View style={styles.headerContainer}>
         <StatusBar
           backgroundColor={Platform.OS === 'ios' ? 'transparent' : '#7758C4'}
           barStyle="light-content"

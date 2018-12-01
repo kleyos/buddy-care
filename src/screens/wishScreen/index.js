@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   TextInput,
   Platform,
-  Keyboard
+  Keyboard,
+  ScrollView
 } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 import { navTypes } from '../../config/configureNavigation';
@@ -104,7 +105,7 @@ export default class WishScreen extends Component {
             <Text style={styles.text}> What’s your immediate wish? </Text>
           </View>
         }
-        <View style={{ flex: 1, alignItems: 'center', marginVertical: 10 }}>
+        <View style={{ flex: isKeyboard ? 0.5 : 1, alignItems: 'center', marginVertical: 10 }}>
           <View style={styles.inputContainer}>
             {warning &&
               <Text style={styles.warningText}>
@@ -121,7 +122,6 @@ export default class WishScreen extends Component {
               value={this.state.text}
               underlineColorAndroid="transparent"
               textAlignVertical="top"
-              KeyboardType="phone-pad"
             />
             <Text style={styles.charText}>{this.state.text.length}/500</Text>
           </View>

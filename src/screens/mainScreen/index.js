@@ -55,8 +55,10 @@ export default class MainScreen extends Component {
   }
   
   handleAvatarPress = id => {
-    const { navigate, fetchUserProfile } = this.props;
-    navigate(navTypes.USER_PROFILE, { ownerId: id });
+    const { navigate, fetchUserProfile, yourId } = this.props;
+    if (id === yourId) {
+      navigate(navTypes.MY_PROFILE);
+    } else { navigate(navTypes.USER_PROFILE, { ownerId: id })}
     fetchUserProfile(id);
   }
   
