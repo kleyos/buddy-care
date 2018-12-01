@@ -13,14 +13,14 @@ export const openNotification = notification => {
     .setBody(notification._body);
 
   if (Platform.OS === 'android') {
-    const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
-      .setDescription('My apps test channel');
+    const channel = new firebase.notifications.Android.Channel('buddy-care-channel', 'BaddyCare Channel', firebase.notifications.Android.Importance.Max)
+      .setDescription('BaddyCare app channel');
 
     firebase.notifications().android.createChannel(channel);
 
     notificationNew
       .android.setChannelId(channel._channelId)
-      .android.setSmallIcon('ic_launcher');
+      .android.setSmallIcon('ic_notification');
   }
 
   firebase.notifications().displayNotification(notificationNew);

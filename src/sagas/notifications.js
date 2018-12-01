@@ -1,7 +1,5 @@
 import { takeEvery } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
-import { openNotification } from '../config/utils';
-import { getNotifications } from '../modules/main/actions';
 import { gettingDeviceToken } from '../modules/auth/actions';
 import { assignDevice } from '../api';
 
@@ -23,19 +21,8 @@ function getDeviceTokenWorker({ payload }) {
   }
 }
 
-function getNotificationWorker() {
-  try {
-    firebase.notifications().onNotification(notification => {
-      openNotification(notification);
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 export default function* notificationWatcher() {
   yield [
     takeEvery(gettingDeviceToken, getDeviceTokenWorker),
-    takeEvery(getNotifications, getNotificationWorker)
   ];
 }

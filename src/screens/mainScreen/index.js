@@ -4,15 +4,14 @@ import {
   FlatList,
   Text,
   Image,
-  TouchableOpacity,
-  ActivityIndicator
+  TouchableOpacity
 } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import MaterialInitials from 'react-native-material-initials/native';
-
+import firebase from 'react-native-firebase';
 import { navTypes } from '../../config/configureNavigation';
 import MainHeader from '../../containers/MainHeaderContainer';
-import { randomColor, defineSource } from '../../config/utils';
+import { randomColor, defineSource, openNotification } from '../../config/utils';
 import styles from './styles';
 
 export default class MainScreen extends Component {
@@ -25,8 +24,16 @@ export default class MainScreen extends Component {
   }
 
   componentDidMount() {
-    this.notificationListener = this.props.getNotifications();
-    this.props.fetchAllCards();
+    this.notificationListener = firebase.notifications().onNotification(notification => {
+      openNotification(notification);
+      this.props.fetchAllCards();
+      this.props.fetchAllCards();
+      this.props.fetchAllCards();
+    });
+
+    firebase.notifications().onNotificationOpened(notificationOpen => {
+      firebase.notifications().removeDeliveredNotification(notificationOpen.notification._notificationId)
+    });
   }
   
   componentWillReceiveProps(nextProps) {
