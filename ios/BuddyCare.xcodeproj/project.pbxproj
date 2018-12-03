@@ -36,6 +36,8 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* BuddyCareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BuddyCareTests.m */; };
+		41FD7027DC32DEF210714D7D /* libPods-BuddyCare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5569795A53F64C23E9424901 /* libPods-BuddyCare.a */; };
+		4B5A76AA21B52EF200FE8E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B5A76A921B52EF100FE8E71 /* GoogleService-Info.plist */; };
 		4B79B90C21B301EB0018833F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B79B90B21B301EB0018833F /* UserNotifications.framework */; };
 		4B79B90E21B305870018833F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B79B90D21B305870018833F /* GoogleService-Info.plist */; };
 		4B79B91821B31BA20018833F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B79B91521B31BA20018833F /* logo.png */; };
@@ -49,11 +51,10 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		68A844EA55BE4369AF0CA633 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29A970DBDC104E449049C5F3 /* Zocial.ttf */; };
 		6FE53A6D932F48E2BDCC3A9F /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83D71A2730EB44BEA460C40C /* FontAwesome.ttf */; };
-		7740C920336390082E3F711A /* libPods-BuddyCare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7C1FB4175B7737843C7080 /* libPods-BuddyCare.a */; };
 		7EFAF5B6961F4D0DABD20144 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D33179077F344407A6DFC20B /* libRNVectorIcons.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		84193ABC42DB7887EEE2C3E2 /* libPods-BuddyCareTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD7D924B8D3FEB39A7FFB1C /* libPods-BuddyCareTests.a */; };
 		8D27E9D4750B436FB24D443A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B757D1DB110C4E2E90621371 /* Octicons.ttf */; };
-		A93192824B4A45DF88E70149 /* libPods-BuddyCareTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8B988EBDB8B85CC49EA98C /* libPods-BuddyCareTests.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B3E18F3B62424FD9A2BBFA2D /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F914F130D0E49C683424D93 /* libRNFirebase.a */; };
 		B6E7D445DE0848AA9F31FFF4 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2625BEE246014C37A9EE5556 /* libRCTFBSDK.a */; };
@@ -378,6 +379,8 @@
 		3C6DA28EACF147CA847E230C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3F914F130D0E49C683424D93 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		484F29E9F19D4ABF95CC0761 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		4B5A76A821B523BB00FE8E71 /* BuddyCare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BuddyCare.entitlements; path = BuddyCare/BuddyCare.entitlements; sourceTree = "<group>"; };
+		4B5A76A921B52EF100FE8E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B79B90B21B301EB0018833F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		4B79B90D21B305870018833F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B79B91521B31BA20018833F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -387,11 +390,12 @@
 		4F5B0AC22012112B00D9CA52 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		4F5B0AC32012112C00D9CA52 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		4F5B0AC42012112C00D9CA52 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		5569795A53F64C23E9424901 /* libPods-BuddyCare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuddyCare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AD7D924B8D3FEB39A7FFB1C /* libPods-BuddyCareTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuddyCareTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		83D71A2730EB44BEA460C40C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		AC8B988EBDB8B85CC49EA98C /* libPods-BuddyCareTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuddyCareTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B26B69C3D6A3F7DD09606C51 /* Pods-BuddyCareTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuddyCareTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuddyCareTests/Pods-BuddyCareTests.release.xcconfig"; sourceTree = "<group>"; };
 		B757D1DB110C4E2E90621371 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -404,7 +408,6 @@
 		F16929B5D3144AC68E97A383 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		F48644A6E6244BDD855C5E9F /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		FCC7864845F1456F9E7E1A96 /* Pods-BuddyCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuddyCare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuddyCare/Pods-BuddyCare.debug.xcconfig"; sourceTree = "<group>"; };
-		FD7C1FB4175B7737843C7080 /* libPods-BuddyCare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuddyCare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,7 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
-				A93192824B4A45DF88E70149 /* libPods-BuddyCareTests.a in Frameworks */,
+				84193ABC42DB7887EEE2C3E2 /* libPods-BuddyCareTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +445,7 @@
 				B6E7D445DE0848AA9F31FFF4 /* libRCTFBSDK.a in Frameworks */,
 				7EFAF5B6961F4D0DABD20144 /* libRNVectorIcons.a in Frameworks */,
 				B3E18F3B62424FD9A2BBFA2D /* libRNFirebase.a in Frameworks */,
-				7740C920336390082E3F711A /* libPods-BuddyCare.a in Frameworks */,
+				41FD7027DC32DEF210714D7D /* libPods-BuddyCare.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +556,8 @@
 		13B07FAE1A68108700A75B9A /* BuddyCare */ = {
 			isa = PBXGroup;
 			children = (
+				4B5A76A921B52EF100FE8E71 /* GoogleService-Info.plist */,
+				4B5A76A821B523BB00FE8E71 /* BuddyCare.entitlements */,
 				4B79B91521B31BA20018833F /* logo.png */,
 				4B79B91721B31BA20018833F /* SplashScreen.png */,
 				4B79B91621B31BA20018833F /* stars.png */,
@@ -623,8 +628,8 @@
 				4F5B0AC42012112C00D9CA52 /* FBSDKCoreKit.framework */,
 				4F5B0AC12012112B00D9CA52 /* FBSDKLoginKit.framework */,
 				4F5B0AC22012112B00D9CA52 /* FBSDKShareKit.framework */,
-				FD7C1FB4175B7737843C7080 /* libPods-BuddyCare.a */,
-				AC8B988EBDB8B85CC49EA98C /* libPods-BuddyCareTests.a */,
+				5569795A53F64C23E9424901 /* libPods-BuddyCare.a */,
+				5AD7D924B8D3FEB39A7FFB1C /* libPods-BuddyCareTests.a */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -845,6 +850,17 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 3J355W62SK;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.Siri = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1232,6 +1248,7 @@
 				5B95D291B64245F5BD82FDB0 /* Foundation.ttf in Resources */,
 				FEA7F15E6C4D41BA9933A5DE /* Ionicons.ttf in Resources */,
 				4B79B91921B31BA20018833F /* stars.png in Resources */,
+				4B5A76AA21B52EF200FE8E71 /* GoogleService-Info.plist in Resources */,
 				C9BF3D5A19124150B62AECD7 /* MaterialCommunityIcons.ttf in Resources */,
 				0AB522702294416B9A7699B5 /* MaterialIcons.ttf in Resources */,
 				4B79B91821B31BA20018833F /* logo.png in Resources */,
@@ -1456,6 +1473,7 @@
 			baseConfigurationReference = FCC7864845F1456F9E7E1A96 /* Pods-BuddyCare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BuddyCare/BuddyCare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1478,6 +1496,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = BuddyCare;
 				PRODUCT_NAME = BuddyCare;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1489,6 +1508,7 @@
 			baseConfigurationReference = C29FCA8B8E5120C2C3A63C2E /* Pods-BuddyCare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BuddyCare/BuddyCare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1511,6 +1531,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = BuddyCare;
 				PRODUCT_NAME = BuddyCare;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";

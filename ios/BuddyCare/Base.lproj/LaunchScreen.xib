@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,28 +19,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="SplashScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="JfT-5o-DJh">
-                        <rect key="frame" x="-16" y="0.0" width="451" height="896"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="JfT-5o-DJh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                     </imageView>
                     <imageView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="logo.png" highlightedImage="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="hih-sK-5Eb">
-                        <rect key="frame" x="21" y="252" width="372" height="441"/>
+                        <rect key="frame" x="21" y="319" width="372" height="374"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Z7-50-PkC">
-                        <rect key="frame" x="22" y="93" width="374" height="439"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="stars.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Z7-50-PkC">
+                        <rect key="frame" x="22" y="93" width="374" height="218"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="1Z7-50-PkC" firstAttribute="centerX" secondItem="JfT-5o-DJh" secondAttribute="centerX" id="16H-gp-SUW"/>
+                    <constraint firstItem="1Z7-50-PkC" firstAttribute="centerX" secondItem="JfT-5o-DJh" secondAttribute="centerX" constant="2" id="16H-gp-SUW"/>
                     <constraint firstItem="1Z7-50-PkC" firstAttribute="leading" secondItem="IOG-PQ-Vsf" secondAttribute="leadingMargin" constant="2" id="38s-NQ-Xf2"/>
                     <constraint firstAttribute="trailingMargin" secondItem="1Z7-50-PkC" secondAttribute="trailing" constant="-2" id="DsY-PP-Ste"/>
                     <constraint firstItem="6oz-de-c8Z" firstAttribute="top" secondItem="1Z7-50-PkC" secondAttribute="bottom" constant="330" id="Ic2-87-TPN"/>
-                    <constraint firstItem="hih-sK-5Eb" firstAttribute="centerY" secondItem="IOG-PQ-Vsf" secondAttribute="centerY" id="KaN-C7-znz"/>
+                    <constraint firstItem="hih-sK-5Eb" firstAttribute="centerY" secondItem="IOG-PQ-Vsf" secondAttribute="centerY" constant="15.5" id="KaN-C7-znz"/>
+                    <constraint firstItem="JfT-5o-DJh" firstAttribute="top" secondItem="IOG-PQ-Vsf" secondAttribute="top" id="QjC-uS-rug"/>
+                    <constraint firstItem="JfT-5o-DJh" firstAttribute="leading" secondItem="IOG-PQ-Vsf" secondAttribute="leading" id="arI-WY-VUT"/>
                     <constraint firstItem="hih-sK-5Eb" firstAttribute="centerX" secondItem="IOG-PQ-Vsf" secondAttribute="centerX" id="iOl-WQ-gY5"/>
+                    <constraint firstItem="JfT-5o-DJh" firstAttribute="bottom" secondItem="6oz-de-c8Z" secondAttribute="top" id="lsz-Wl-mor"/>
                     <constraint firstItem="1Z7-50-PkC" firstAttribute="top" secondItem="X4t-P8-Iky" secondAttribute="bottom" constant="49" id="ulP-Ig-9rj"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="363.75" y="1063.7323943661972"/>
+            <point key="canvasLocation" x="362.31884057971018" y="1063.3928571428571"/>
         </viewController>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>
