@@ -1,4 +1,4 @@
-framework module Pods_BuddyCare {
+module Pods_BuddyCare {
   umbrella header "Pods-BuddyCare-umbrella.h"
 
   export *

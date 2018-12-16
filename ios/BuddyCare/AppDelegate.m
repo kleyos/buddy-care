@@ -9,7 +9,7 @@
 
 #import "AppDelegate.h"
 #import <Firebase.h>
-#import "RNFirebaseNotifications.h"
+#import "RNFirebaseNotifications.h" 
 #import "RNFirebaseMessaging.h"
 
 #import <React/RCTBundleURLProvider.h>
@@ -21,7 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  
   [FIRApp configure];
+  
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
   [RNFirebaseNotifications configure];
   
