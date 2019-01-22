@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,25 +16,25 @@
                 <viewControllerLayoutGuide type="bottom" id="6oz-de-c8Z"/>
             </layoutGuides>
             <view key="view" contentMode="scaleToFill" id="IOG-PQ-Vsf">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SplashScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="JfT-5o-DJh">
-                        <rect key="frame" x="-27" y="-122" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="-38" width="414" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="logo.png" highlightedImage="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="hih-sK-5Eb">
-                        <rect key="frame" x="16" y="182" width="288" height="275"/>
+                        <rect key="frame" x="79" y="286" width="264" height="275"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stars.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Z7-50-PkC">
-                        <rect key="frame" x="17" y="64" width="287" height="156"/>
+                        <rect key="frame" x="65" y="90" width="287" height="156"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" red="0.53333333333333333" green="0.53725490196078429" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             </view>
-            <point key="canvasLocation" x="358.125" y="1061.6197183098591"/>
+            <point key="canvasLocation" x="356.52173913043481" y="1061.413043478261"/>
         </viewController>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>
