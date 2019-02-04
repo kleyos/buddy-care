@@ -105,7 +105,12 @@ export default class WishScreen extends Component {
             <Text style={styles.text}> What’s your immediate wish? </Text>
           </View>
         }
-        <View style={{ flex: isKeyboard ? 0.5 : 1, alignItems: 'center', marginVertical: 10 }}>
+        <View style={{ 
+          flex: isKeyboard ? 0.5 : 1,
+          alignItems: 'center',
+          marginVertical: 10,
+          marginTop: isKeyboard ? 40 : 0
+        }}>
           <View style={styles.inputContainer}>
             {warning &&
               <Text style={styles.warningText}>

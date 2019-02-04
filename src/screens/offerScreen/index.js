@@ -109,7 +109,12 @@ export default class OfferScreen extends Component {
             <Text style={styles.text}> What could you offer right now? </Text>
           </View>
         }
-        <View style={{ flex: isKeyboard ? 0.5 : 1, alignItems: 'center', marginVertical: 10 }}>
+        <View style={{
+          flex: isKeyboard ? 0.5 : 1,
+          alignItems: 'center',
+          marginVertical: 10,
+          marginTop: isKeyboard ? 40 : 0
+        }}>
           <View style={styles.inputContainer}>
             {warning &&
               <Text style={styles.warningText}>

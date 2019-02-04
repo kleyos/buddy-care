@@ -6,7 +6,7 @@ import {
   StatusBar,
   Platform
 } from 'react-native';
-import { HeaderBackButton } from 'react-navigation';
+import { HeaderBackButton, SafeAreaView } from 'react-navigation';
 import { Avatar } from 'react-native-elements';
 import { navTypes } from '../../config/configureNavigation';
 import styles from './styles';
@@ -16,7 +16,7 @@ export default class MainHeader extends Component {
     const { loggedIn, userAvatar, navigateBack, navigate } = this.props;
 
     return (
-      <View style={styles.headerContainer}>
+      <SafeAreaView style={styles.headerContainer} forceInset={{ bottom: 'never' }}>
         <StatusBar
           backgroundColor={Platform.OS === 'ios' ? 'transparent' : '#7758C4'}
           barStyle="light-content"
@@ -40,7 +40,7 @@ export default class MainHeader extends Component {
           />}
           {!loggedIn && <View style={{ width: 50 }} />}
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
