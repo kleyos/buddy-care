@@ -20,7 +20,7 @@ export const openNotification = notification => {
 
     notificationNew
       .android.setChannelId(channel._channelId)
-      .android.setSmallIcon('ic_notification');
+      .android.setSmallIcon('ic');
   }
 
   firebase.notifications().displayNotification(notificationNew);
